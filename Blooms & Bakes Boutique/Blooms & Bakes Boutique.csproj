@@ -16,4 +16,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.25" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Blooms &amp; Bakes Boutique.Core\Blooms &amp; Bakes Boutique.Core.csproj" />
+  </ItemGroup>
+
 </Project>
