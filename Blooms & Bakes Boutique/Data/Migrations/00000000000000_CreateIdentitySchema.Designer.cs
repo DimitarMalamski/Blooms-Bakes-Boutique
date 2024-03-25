@@ -9,7 +9,7 @@ using System;
 
 namespace Blooms___Bakes_Boutique.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(BloomsAndBakesDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

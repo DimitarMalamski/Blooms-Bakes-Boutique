@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blooms___Bakes_Boutique.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class BloomsAndBakesDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public BloomsAndBakesDbContext(DbContextOptions<BloomsAndBakesDbContext> options)
             : base(options)
         {
         }
