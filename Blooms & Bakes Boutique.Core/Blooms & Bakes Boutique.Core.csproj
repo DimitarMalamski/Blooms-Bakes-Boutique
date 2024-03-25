@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Blooms &amp; Bakes Boutique.Infrastructure\Blooms &amp; Bakes Boutique.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
