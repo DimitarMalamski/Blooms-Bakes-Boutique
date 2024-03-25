@@ -5,7 +5,7 @@
     ViewData["Title"] = "Log in";
 }
 
-<h1 class="text-center">@ViewData["Title"]</h1>
+<h1 class="text-center" style="margin-top: 5em">@ViewData["Title"]</h1>
 <div class="row" style="justify-content: center">
     <div class="col-md-4">
         <section>
@@ -17,12 +17,12 @@
                     <label asp-for="Input.Email" class="form-label"></label>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating" style="margin-top: 1em">
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
                     <label asp-for="Input.Password" class="form-label"></label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <div>
+                <div style="margin-top: 1em; margin-bottom: 0.5em">
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary" style="background-color: lightpink; border: 2px solid #f075a0">Log in</button>
                 </div>
             </form>
         </section>
