@@ -1,4 +1,4 @@
-using Blooms___Bakes_Boutique.Data;
+using Blooms___Bakes_Boutique.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
