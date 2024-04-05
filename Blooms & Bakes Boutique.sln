@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blooms & Bakes Boutique", "Blooms & Bakes Boutique\Blooms & Bakes Boutique.csproj", "{908CA2D2-EA9E-4D2C-99AD-E82EA1E43DFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blooms & Bakes Boutique", "Blooms & Bakes Boutique\Blooms & Bakes Boutique.csproj", "{908CA2D2-EA9E-4D2C-99AD-E82EA1E43DFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blooms & Bakes Boutique.Core", "Blooms & Bakes Boutique.Core\Blooms & Bakes Boutique.Core.csproj", "{2A128033-429B-4C1D-B319-6552A0802078}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blooms & Bakes Boutique.Core", "Blooms & Bakes Boutique.Core\Blooms & Bakes Boutique.Core.csproj", "{2A128033-429B-4C1D-B319-6552A0802078}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blooms & Bakes Boutique.Infrastructure", "Blooms & Bakes Boutique.Infrastructure\Blooms & Bakes Boutique.Infrastructure.csproj", "{CD017240-D9A5-4456-A127-C35DEF419245}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blooms & Bakes Boutique.Infrastructure", "Blooms & Bakes Boutique.Infrastructure\Blooms & Bakes Boutique.Infrastructure.csproj", "{CD017240-D9A5-4456-A127-C35DEF419245}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
