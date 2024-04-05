@@ -25,8 +25,4 @@
     <ProjectReference Include="..\Blooms &amp; Bakes Boutique.Core\Blooms &amp; Bakes Boutique.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Shared\Components\MainMenuComponents\" />
-  </ItemGroup>
-
 </Project>
