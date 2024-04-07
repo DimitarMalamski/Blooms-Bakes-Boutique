@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Flowers.Flower;
 
 namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers
 {
@@ -18,45 +19,45 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers
 
         [Required]
         [MaxLength(TitleMaxLength)]
-        [Comment("Pastry Title")]
+        [Comment("Flower Title")]
         public string Title { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(DescriptionMaxLength)]
-        [Comment("Pastry Description")]
+        [Comment("Flower Description")]
         public string Description { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(RecipeMaxLength)]
-        [Comment("Pastry Recipe")]
-        public string Recipe { get; set; } = string.Empty;
+        [MaxLength(ColourMaxLength)]
+        [Comment("Flower Colour")]
+        public string Colour { get; set; } = string.Empty;
 
         [Required]
-        [Comment("Pastry Image")]
+        [Comment("Flower Image")]
         public string ImageUrl { get; set; } = string.Empty;
 
         [Required]
-        [Comment("Pastry Price")]
+        [Comment("Price Per Bouquet")]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Price { get; set; }
+        public decimal PricePerBouquet { get; set; }
 
         [Required]
         [Comment("Category Identifier")]
         public int CategoryId { get; set; }
 
         [Required]
-        [Comment("Patissier Identifier")]
-        public int PatissierId { get; set; }
+        [Comment("Florist Identifier")]
+        public int FloristId { get; set; }
 
-        [Comment("User id of the Liker")]
-        public string? LikerId { get; set; }
+        [Comment("User id of the Gatherer")]
+        public string? GathererId { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
-        [Comment("Category")]
-        public PastryCategory PastryCategory { get; set; } = null!;
+        [Comment("Flower's Category")]
+        public FlowerCategory FlowerCategory { get; set; } = null!;
 
-        [ForeignKey(nameof(PatissierId))]
-        [Comment("Patissier")]
-        public Patissier Patissier { get; set; } = null!;
+        [ForeignKey(nameof(FloristId))]
+        [Comment("Florist")]
+        public Florist Florist { get; set; } = null!;
     }
 }
