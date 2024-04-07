@@ -8,31 +8,31 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Constants
 {
     public static class DataConstants
     {
-        // Pastry data constants class
-        public class Pastry
+        // Pastries data constants class
+        public class Pastries
         {
-            // IndividualPastry data constants class
-            public class IndividualPastry
+            // Pastry data constants class
+            public class Pastry
             {
-                // IndividualPastry title length requirements 
+                // Pastry title length requirements 
                 public const int TitleMinLength = 5;
                 public const int TitleMaxLength = 100;
 
-                // IndividualPastry description length requirements
+                // Pastry description length requirements
                 public const int DescriptionMinLength = 20;
                 public const int DescriptionMaxLength = 300;
 
-                // IndividualPastry recipe length requirements
+                // Pastry recipe length requirements
                 public const int RecipeMinLength = 10;
                 public const int RecipeMaxLength = 1000;
 
-                // IndividualPastry price length requirements
+                // Pastry price length requirements
                 public const string PriceMinLength = "0";
                 public const string PriceMaxLength = "200";
 
             }
 
-            // Category data constants class
+            // Pastry Category data constants class
             public class PastryCategory
             {
                 // Pastry Category name max length  
@@ -48,42 +48,43 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Constants
             }
         }
         
+        // Flowers data constants class
         public class Flowers
         {
-            // IndividualPastry data constants class
-            public class IndividualPastry
+            // Flowers data constants class
+            public class Flower
             {
-                // IndividualPastry title length requirements 
-                public const int TitleMinLength = 5;
-                public const int TitleMaxLength = 100;
+                // Flower title length requirements 
+                public const int TitleMinLength = 10;
+                public const int TitleMaxLength = 60;
 
-                // IndividualPastry description length requirements
+                // Flower description length requirements
                 public const int DescriptionMinLength = 20;
-                public const int DescriptionMaxLength = 300;
+                public const int DescriptionMaxLength = 200;
 
-                // IndividualPastry recipe length requirements
-                public const int RecipeMinLength = 10;
-                public const int RecipeMaxLength = 1000;
+                // Flower recipe length requirements
+                public const int ColourMinLength = 3;
+                public const int ColourMaxLength = 20;
 
-                // IndividualPastry price length requirements
-                public const string PriceMinLength = "0";
-                public const string PriceMaxLength = "200";
+                // Flower price length requirements
+                public const string PricePerBouquetMinLength = "0";
+                public const string PricePerBouquetMaxLength = "1000";
 
             }
 
-            // Category data constants class
-            public class PastryCategory
+            // Flower Category data constants class
+            public class FlowerCategory
             {
-                // Pastry Category name max length  
+                // Flower Category name max length  
                 public const int NameMaxLength = 40;
             }
 
-            // Patissier data constants class
-            public class Patissier
+            // Florist data constants class
+            public class Florsit
             {
-                // Patissier MasterChef Title length requirements 
-                public const int MasterChefMinLength = 5;
-                public const int MasterChefMaxLength = 30;
+                // Patissier FlowerMaster Title length requirements 
+                public const int FlowerMasterMinLength = 5;
+                public const int FlowerMasterMaxLength = 30;
             }
         }
     }
