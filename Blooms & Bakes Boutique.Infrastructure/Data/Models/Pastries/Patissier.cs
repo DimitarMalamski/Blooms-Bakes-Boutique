@@ -30,5 +30,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry
         [ForeignKey(nameof(UserId))]
         [Comment("User")]
         public IdentityUser User { get; set; } = null!;
+
+        public List<Pastry> Pastries { get; set; } = new List<Pastry>();
     }
 }
