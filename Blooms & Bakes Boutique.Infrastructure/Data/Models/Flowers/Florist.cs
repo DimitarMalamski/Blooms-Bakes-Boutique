@@ -30,5 +30,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers
         [ForeignKey(nameof(UserId))]
         [Comment("User")]
         public IdentityUser User { get; set; } = null!;
+
+        public List<Flower> Flowers { get; set; } = new List<Flower>();
     }
 }
