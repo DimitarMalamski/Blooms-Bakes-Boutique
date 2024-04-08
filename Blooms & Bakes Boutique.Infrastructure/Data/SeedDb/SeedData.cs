@@ -40,9 +40,16 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
         public Flower SecondFlower { get; set; }
         public Flower ThirdFlower { get; set; }
 
-        public void SeedData()
+        // Constructor 
+        public SeedData()
         {
-
+            SeedUsers();
+            SeedPatissiers();
+            SeedFlorists();
+            SeedPastryCategories();
+            SeedFlowerCategories();
+            SeedPastries();
+            SeedFlowers();
         }
 
         // Private individual seeding methods
@@ -84,7 +91,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
             GuestUser.PasswordHash = hasher.HashPassword(PatissierUser, "guest123");
         }
 
-        private void SeedPatissier()
+        private void SeedPatissiers()
         {
             Patissier patissier = new Patissier()
             {
@@ -94,7 +101,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
             };
         }
 
-        private void SeedFlorist()
+        private void SeedFlorists()
         {
             Florist florist = new Florist()
             {
