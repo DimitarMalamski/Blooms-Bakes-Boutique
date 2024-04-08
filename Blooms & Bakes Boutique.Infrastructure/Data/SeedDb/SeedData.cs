@@ -1,11 +1,6 @@
 ﻿using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
 {
@@ -21,7 +16,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
         public Florist Florist { get; set; }
 
         // Pastry categories
-        public PastryCategory CakesCategory { get; set; }
+        public PastryCategory CakeCategory { get; set; }
         public PastryCategory CupcakeCategory { get; set; }
         public PastryCategory IceCreamCategory { get; set; }
 
@@ -113,7 +108,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
 
         private void SeedPastryCategories()
         {
-            CakesCategory = new PastryCategory()
+            CakeCategory = new PastryCategory()
             {
                 Id = 1,
                 Name = "Cake"
@@ -163,7 +158,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
                 Recipe = "Ingredients:\r\n- 2 cups grated carrots\r\n- 1 cup all-purpose flour\r\n- 1 teaspoon baking powder\r\n- 1/2 teaspoon baking soda\r\n- 1/2 teaspoon salt\r\n- 1 teaspoon ground cinnamon\r\n- 1/2 teaspoon ground nutmeg\r\n- 1/4 teaspoon ground cloves\r\n- 2 large eggs\r\n- 1/2 cup vegetable oil\r\n- 3/4 cup granulated sugar\r\n- 1/2 cup chopped walnuts or pecans (optional)\r\n- Cream cheese frosting (store-bought or homemade)\r\n\r\nInstructions:\r\n1. Preheat your oven to 350°F (175°C). Grease and flour a 9-inch round cake pan.\r\n2. In a large mixing bowl, whisk together the flour, baking powder, baking soda, salt, cinnamon, nutmeg, and cloves.\r\n3. In another bowl, beat the eggs, then mix in the vegetable oil and granulated sugar until well combined.\r\n4. Gradually add the wet ingredients to the dry ingredients, stirring until just combined. Fold in the grated carrots and chopped nuts, if using.\r\n5. Pour the batter into the prepared cake pan and smooth the top with a spatula.\r\n6. Bake in the preheated oven for 25-30 minutes, or until a toothpick inserted into the center comes out clean.\r\n7. Allow the cake to cool completely in the pan on a wire rack.\r\n8. Once cooled, spread a layer of cream cheese frosting over the top of the cake.\r\n9. Slice and serve your delicious homemade carrot cake! Enjoy!\"",
                 ImageUrl = "https://www.glorioustreats.com/wp-content/uploads/2014/05/best-carrot-cake-recipe-square.jpeg",
                 Price = 12.00M,
-                CategoryId = CakesCategory.Id,
+                CategoryId = CakeCategory.Id,
                 PatissierId = Patissier.Id,
             };
 
