@@ -60,7 +60,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Constants
 
                 // Flower description length requirements
                 public const int DescriptionMinLength = 20;
-                public const int DescriptionMaxLength = 200;
+                public const int DescriptionMaxLength = 500;
 
                 // Flower recipe length requirements
                 public const int ColourMinLength = 3;
