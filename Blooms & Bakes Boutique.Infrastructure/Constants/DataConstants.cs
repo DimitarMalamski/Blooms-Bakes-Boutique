@@ -20,7 +20,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Constants
 
                 // Pastry description length requirements
                 public const int DescriptionMinLength = 20;
-                public const int DescriptionMaxLength = 300;
+                public const int DescriptionMaxLength = 500;
 
                 // Pastry recipe length requirements
                 public const int RecipeMinLength = 10;
