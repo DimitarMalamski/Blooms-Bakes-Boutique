@@ -12,7 +12,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
     internal class SeedData
     {
         // User roles
-        public IdentityUser FloristUser { get; set; } 
+        public IdentityUser FloristUser { get; set; }
         public IdentityUser PatissierUser { get; set; }
         public IdentityUser GuestUser { get; set; }
 
@@ -44,12 +44,12 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
         {
             var hasher = new PasswordHasher<IdentityUser>();
 
-            PatissierUser = new IdentityUser() 
+            PatissierUser = new IdentityUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d8395082",
                 UserName = "patissier@mail.com",
                 NormalizedUserName = "patissier@mail.com",
-                Email = "patissier@mail.com", 
+                Email = "patissier@mail.com",
                 NormalizedEmail = "patissier@mail.com"
             };
 
@@ -66,18 +66,89 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
 
             FloristUser.PasswordHash = hasher.HashPassword(FloristUser, "agent123");
 
-            GuestUser = new IdentityUser() 
-            { 
-                Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 
+            GuestUser = new IdentityUser()
+            {
+                Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 UserName = "guest@mail.com",
                 NormalizedUserName = "guest@mail.com",
                 Email = "guest@mail.com",
                 NormalizedEmail = "guest@mail.com"
-            }; 
+            };
 
             GuestUser.PasswordHash = hasher.HashPassword(PatissierUser, "guest123");
         }
+
+        private void SeedPatissier()
+        {
+            Patissier patissier = new Patissier()
+            {
+                Id = 1,
+                MasterChefTitle = "Master of the Oven",
+                UserId = PatissierUser.Id
+            };
+        }
+
+        private void SeedFlorist()
+        {
+            Florist florist = new Florist()
+            {
+                Id = 1,
+                FlowerMasterTitle = "Bloomsmith",
+                UserId = FloristUser.Id
+            };
+        }
+
+        private void SeedPastryCategories()
+        {
+            CakesCategory = new PastryCategory()
+            {
+                Id = 1,
+                Name = "Cake"
+            };
+
+            CupcakeCategory = new PastryCategory()
+            {
+                Id = 2,
+                Name = "Cupcake"
+            };
+
+            IceCreamCategory = new PastryCategory()
+            {
+                Id = 3,
+                Name = "Ice-cream"
+            };
+        }
+
+        private void SeedFlowerCategories()
+        {
+            AnnualCategory = new FlowerCategory()
+            {
+                Id = 1,
+                Name = "Annual"
+            };
+
+            PerennialCategory = new FlowerCategory()
+            {
+                Id = 2,
+                Name = "Perennial"
+            };
+
+            BiennialCategory = new FlowerCategory()
+            {
+                Id = 3,
+                Name = "Biennial"
+            };
+        }
+
+        private void SeedPastries()
+        {
+
+        }
+
+        private void SeedFlowers()
+        {
+
+        }
     }
 
-    }
 }
