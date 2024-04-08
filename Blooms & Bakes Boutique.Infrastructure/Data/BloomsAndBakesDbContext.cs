@@ -1,5 +1,9 @@
 ﻿using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry;
+using Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb.CategoryConfiguration;
+using Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb.ProductConfiguration;
+using Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb.RoleConfiguration;
+using Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb.UserConfiguration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,31 +19,13 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data
         //overwriting OnModelCreating method
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // Pastries
-            builder.Entity<Pastry>()
-                .HasOne(p => p.PastryCategory)
-                .WithMany(pc => pc.Pastries)
-                .HasForeignKey(p => p.CategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Pastry>()
-                .HasOne(p => p.Patissier)
-                .WithMany(pt => pt.Pastries)
-                .HasForeignKey(p => p.PatissierId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            //Flowers
-            builder.Entity<Flower>()
-                .HasOne(f => f.FlowerCategory)
-                .WithMany(fc => fc.Flowers)
-                .HasForeignKey(f => f.CategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Flower>()
-                .HasOne(f => f.Florist)
-                .WithMany(fr => fr.Flowers)
-                .HasForeignKey(f => f.FloristId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new PatissierConfiguration());
+            builder.ApplyConfiguration(new FloristConfiguration());
+            builder.ApplyConfiguration(new PastyCategoryConfiguration());
+            builder.ApplyConfiguration(new FlowerCategoryConfiguration());
+            builder.ApplyConfiguration(new PastryConfiguration());
+            builder.ApplyConfiguration(new FlowerConfiguration());
 
             base.OnModelCreating(builder);
         }
