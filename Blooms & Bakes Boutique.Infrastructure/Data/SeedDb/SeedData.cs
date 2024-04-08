@@ -40,6 +40,12 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
         public Flower SecondFlower { get; set; }
         public Flower ThirdFlower { get; set; }
 
+        public void SeedData()
+        {
+
+        }
+
+        // Private individual seeding methods
         private void SeedUsers()
         {
             var hasher = new PasswordHasher<IdentityUser>();
@@ -185,8 +191,39 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
             FirstFlower = new Flower()
             {
                 Id = 1,
+                Title = "Sunflower",
+                Description = "The sunflower is a bright, iconic flower known for its yellow petals and edible seeds. Symbolizing loyalty and adoration, it brings cheer and versatility to gardens and kitchens alike.",
+                Colour = "Yellow",
+                ImageUrl = "https://www.edenbrothers.com/cdn/shop/products/sunflower-mammoth-grey-stripe-aly-5.jpg?v=1653508165&width=1946",
+                PricePerBouquet = 10.00M,
+                CategoryId = AnnualCategory.Id,
+                FloristId = Florist.Id,
+                GathererId = GuestUser.Id
+            };
 
-            }
+            SecondFlower = new Flower()
+            {
+                Id = 2,
+                Title = "Coneflower",
+                Description = "Coneflower, or Echinacea, is a colorful and hardy perennial known for its striking appearance and reputed health benefits. With vibrant daisy-like petals and a distinctive raised cone center, it adds beauty to gardens while also potentially boosting immunity.",
+                Colour = "Pink",
+                ImageUrl = "https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcTxFY-gSMzBOnjw2O9X2zP2CZ7c7Qqzu1BdB8zaWC36yWrmmiwyNooskXN15u1mGRhp",
+                PricePerBouquet = 13.00M,
+                CategoryId = PerennialCategory.Id,
+                FloristId = Florist.Id
+            };
+
+            ThirdFlower = new Flower()
+            {
+                Id = 3,
+                Title = "Lunaria",
+                Description = "Lunaria, or honesty plant, is a biennial flower prized for its purple or white blooms and distinctive translucent seed pods. With its whimsical charm, it's a popular choice for both gardens and dried flower arrangements.",
+                Colour = "Purple",
+                ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Lunaria_annua_flowers.jpg/1200px-Lunaria_annua_flowers.jpg",
+                PricePerBouquet = 17.00M,
+                CategoryId = BiennialCategory.Id,
+                FloristId = Florist.Id
+            };
         }
     }
 
