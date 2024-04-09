@@ -29,6 +29,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddDefaultIdentity<IdentityUser>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = true;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
 
                 })
                 .AddEntityFrameworkStores<BloomsAndBakesDbContext>();
