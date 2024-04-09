@@ -46,9 +46,17 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Florists");
+                    b.ToTable("Florists", (string)null);
 
                     b.HasComment("Flower's Florist");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FlowerMasterTitle = "Bloomsmith",
+                            UserId = "02174cf0–9412–4cfe-afbf-59f706d72cf6"
+                        });
                 });
 
             modelBuilder.Entity("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower", b =>
@@ -72,8 +80,8 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
                         .HasComment("Flower Description");
 
                     b.Property<int>("FloristId")
@@ -105,9 +113,23 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 
                     b.HasIndex("FloristId");
 
-                    b.ToTable("Flowers");
+                    b.ToTable("Flowers", (string)null);
 
                     b.HasComment("Flowers to pick");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Colour = "Yellow",
+                            Description = "The sunflower is a bright, iconic flower known for its yellow petals and edible seeds. Symbolizing loyalty and adoration, it brings cheer and versatility to gardens and kitchens alike.",
+                            FloristId = 1,
+                            GathererId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            ImageUrl = "https://www.edenbrothers.com/cdn/shop/products/sunflower-mammoth-grey-stripe-aly-5.jpg?v=1653508165&width=1946",
+                            PricePerBouquet = 10.00m,
+                            Title = "Sunflower"
+                        });
                 });
 
             modelBuilder.Entity("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.FlowerCategory", b =>
@@ -127,9 +149,26 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FlowersCategories");
+                    b.ToTable("FlowersCategories", (string)null);
 
                     b.HasComment("Flower's Type/Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Annual"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Perennial"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Biennial"
+                        });
                 });
 
             modelBuilder.Entity("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Pastry", b =>
@@ -147,8 +186,8 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
                         .HasComment("Pastry Description");
 
                     b.Property<string>("ImageUrl")
@@ -166,8 +205,8 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 
                     b.Property<string>("Recipe")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("Pastry Recipe");
 
                     b.Property<string>("TasterId")
@@ -186,9 +225,23 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 
                     b.HasIndex("PatissierId");
 
-                    b.ToTable("Pastries");
+                    b.ToTable("Pastries", (string)null);
 
                     b.HasComment("Pastry to taste");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 2,
+                            Description = "Red velvet cupcakes are rich, moist treats with a hint of cocoa and a striking red hue. Topped with creamy cream cheese frosting, they're a perfect blend of sweet and tangy flavors, ideal for any occasion.",
+                            ImageUrl = "https://www.livewellbakeoften.com/wp-content/uploads/2021/06/Red-Velvet-Cupcakes-3-New-copy.jpg",
+                            PatissierId = 1,
+                            Price = 6.00m,
+                            Recipe = "none",
+                            TasterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            Title = "Red Velvet Cupcakes"
+                        });
                 });
 
             modelBuilder.Entity("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.PastryCategory", b =>
@@ -208,9 +261,26 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PastriesCategories");
+                    b.ToTable("PastriesCategories", (string)null);
 
                     b.HasComment("Pastry's Type/Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Cake"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Cupcake"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Ice-cream"
+                        });
                 });
 
             modelBuilder.Entity("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Patissier", b =>
@@ -237,9 +307,17 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Patissiers");
+                    b.ToTable("Patissiers", (string)null);
 
                     b.HasComment("Pastry's Patissier/Chef");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MasterChefTitle = "Master of the Oven",
+                            UserId = "dea12856-c198-4129-b3f3-b893d8395082"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -357,6 +435,56 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d0ed8667-dd9a-4e4e-a0c6-fe92c50443a1",
+                            Email = "patissier@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "patissier@mail.com",
+                            NormalizedUserName = "patissier@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN1Wl+vVdHRMKAioftraUQSD70l5bYwPn1WspYqyjYDHfJtIC5N5EBHHs3eNyNPW6g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e2e47fb6-e64c-403f-9713-848edde184e5",
+                            TwoFactorEnabled = false,
+                            UserName = "patissier@mail.com"
+                        },
+                        new
+                        {
+                            Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4679a09c-d45a-423c-934b-3426587571c1",
+                            Email = "florist@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "florist@mail.com",
+                            NormalizedUserName = "florist@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPYfpimdVMgyTymlDd/BiMNDCA6+27oh6TlSuldX3vIkrZIYUbr8e6D4OaLppdIBow==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7a7b03aa-3df6-4fb1-98a2-32bab500b550",
+                            TwoFactorEnabled = false,
+                            UserName = "florist@mail.com"
+                        },
+                        new
+                        {
+                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "49d5978f-4211-42c5-92f7-45bc4778ab58",
+                            Email = "guest@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "guest@mail.com",
+                            NormalizedUserName = "guest@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKIdf26uzJkGBWnisrs297zl/Iy0CbXrNyBKB3sZN7mDOqU3R3Tvv5gJswaIRlY0/Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "55588602-7e4b-4cfc-8d5b-5f59e0e99d82",
+                            TwoFactorEnabled = false,
+                            UserName = "guest@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -464,7 +592,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Florist", "Florist")
-                        .WithMany("Flowers")
+                        .WithMany()
                         .HasForeignKey("FloristId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -483,7 +611,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Patissier", "Patissier")
-                        .WithMany("Pastries")
+                        .WithMany()
                         .HasForeignKey("PatissierId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -555,22 +683,12 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Florist", b =>
-                {
-                    b.Navigation("Flowers");
-                });
-
             modelBuilder.Entity("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.FlowerCategory", b =>
                 {
                     b.Navigation("Flowers");
                 });
 
             modelBuilder.Entity("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.PastryCategory", b =>
-                {
-                    b.Navigation("Pastries");
-                });
-
-            modelBuilder.Entity("Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Patissier", b =>
                 {
                     b.Navigation("Pastries");
                 });
