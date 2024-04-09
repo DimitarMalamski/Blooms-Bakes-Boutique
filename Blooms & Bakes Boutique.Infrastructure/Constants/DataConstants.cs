@@ -24,7 +24,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Constants
 
                 // Pastry recipe length requirements
                 public const int RecipeMinLength = 10;
-                public const int RecipeMaxLength = 1000;
+                public const int RecipeMaxLength = int.MaxValue;
 
                 // Pastry price length requirements
                 public const string PriceMinLength = "0";

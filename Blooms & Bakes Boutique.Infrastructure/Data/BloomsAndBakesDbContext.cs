@@ -21,10 +21,10 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data
         {
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new PatissierConfiguration());
-            builder.ApplyConfiguration(new FloristConfiguration());
             builder.ApplyConfiguration(new PastyCategoryConfiguration());
-            builder.ApplyConfiguration(new FlowerCategoryConfiguration());
             builder.ApplyConfiguration(new PastryConfiguration());
+            builder.ApplyConfiguration(new FloristConfiguration());           
+            builder.ApplyConfiguration(new FlowerCategoryConfiguration());           
             builder.ApplyConfiguration(new FlowerConfiguration());
 
             base.OnModelCreating(builder);

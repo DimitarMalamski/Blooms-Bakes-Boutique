@@ -16,13 +16,13 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb.ProductConfiguratio
 
             builder
                 .HasOne(p => p.Patissier)
-                .WithMany(pt => pt.Pastries)
+                .WithMany()
                 .HasForeignKey(p => p.PatissierId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             var data = new SeedData();
 
-            builder.HasData(new Pastry[] { data.FirstPastry, data.SecondPastry, data.ThirdPastry });
+            builder.HasData(new Pastry[] { data.FirstPastry });
         }
     }
 }
