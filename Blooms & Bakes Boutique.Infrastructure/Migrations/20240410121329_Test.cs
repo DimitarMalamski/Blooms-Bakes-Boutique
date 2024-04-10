@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 {
-    public partial class SeedData : Migration
+    public partial class Test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -295,9 +295,9 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "02174cf0–9412–4cfe-afbf-59f706d72cf6", 0, "4679a09c-d45a-423c-934b-3426587571c1", "florist@mail.com", false, false, null, "florist@mail.com", "florist@mail.com", "AQAAAAEAACcQAAAAEPYfpimdVMgyTymlDd/BiMNDCA6+27oh6TlSuldX3vIkrZIYUbr8e6D4OaLppdIBow==", null, false, "7a7b03aa-3df6-4fb1-98a2-32bab500b550", false, "florist@mail.com" },
-                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "49d5978f-4211-42c5-92f7-45bc4778ab58", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEKIdf26uzJkGBWnisrs297zl/Iy0CbXrNyBKB3sZN7mDOqU3R3Tvv5gJswaIRlY0/Q==", null, false, "55588602-7e4b-4cfc-8d5b-5f59e0e99d82", false, "guest@mail.com" },
-                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "d0ed8667-dd9a-4e4e-a0c6-fe92c50443a1", "patissier@mail.com", false, false, null, "patissier@mail.com", "patissier@mail.com", "AQAAAAEAACcQAAAAEN1Wl+vVdHRMKAioftraUQSD70l5bYwPn1WspYqyjYDHfJtIC5N5EBHHs3eNyNPW6g==", null, false, "e2e47fb6-e64c-403f-9713-848edde184e5", false, "patissier@mail.com" }
+                    { "02174cf0–9412–4cfe-afbf-59f706d72cf6", 0, "d7863fa7-03b7-4ed2-a5aa-4aee97ec6c10", "florist@mail.com", false, false, null, "florist@mail.com", "florist@mail.com", "AQAAAAEAACcQAAAAEK28/VoHb1ku5Zd1FngwoF8J5cR8yr7r6/2f3ONDDgbg0s+NTCugf4/qEnDoadiQ6A==", null, false, "51cc5957-6243-4c22-977a-dc40306c95ee", false, "florist@mail.com" },
+                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "cdf8099f-0a90-4f0f-bb3d-3689523997f2", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEBgQ7Oiim64so2eaHTM6dLV99pltlnyw2XoU65YxwqiTTjpTEmRBkSw+LE7qob0BMA==", null, false, "928d3673-33b8-493c-aa5f-7fa605d14842", false, "guest@mail.com" },
+                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "2e31a135-9fec-47d8-be84-1b230807a326", "patissier@mail.com", false, false, null, "patissier@mail.com", "patissier@mail.com", "AQAAAAEAACcQAAAAEHy6YJKcmgbKKQ1tAKQ6njIMBCR9t8k+qRm5JssMJGxc8aox1X7LcEW6hh9TUAgtmA==", null, false, "1b442f47-7d36-448a-b60a-763fdebd6932", false, "patissier@mail.com" }
                 });
 
             migrationBuilder.InsertData(

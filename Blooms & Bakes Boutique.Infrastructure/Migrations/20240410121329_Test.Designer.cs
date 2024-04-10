@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
 {
     [DbContext(typeof(BloomsAndBakesDbContext))]
-    [Migration("20240409194332_SeedData")]
-    partial class SeedData
+    [Migration("20240410121329_Test")]
+    partial class Test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -443,15 +443,15 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d0ed8667-dd9a-4e4e-a0c6-fe92c50443a1",
+                            ConcurrencyStamp = "2e31a135-9fec-47d8-be84-1b230807a326",
                             Email = "patissier@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "patissier@mail.com",
                             NormalizedUserName = "patissier@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN1Wl+vVdHRMKAioftraUQSD70l5bYwPn1WspYqyjYDHfJtIC5N5EBHHs3eNyNPW6g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHy6YJKcmgbKKQ1tAKQ6njIMBCR9t8k+qRm5JssMJGxc8aox1X7LcEW6hh9TUAgtmA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e2e47fb6-e64c-403f-9713-848edde184e5",
+                            SecurityStamp = "1b442f47-7d36-448a-b60a-763fdebd6932",
                             TwoFactorEnabled = false,
                             UserName = "patissier@mail.com"
                         },
@@ -459,15 +459,15 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4679a09c-d45a-423c-934b-3426587571c1",
+                            ConcurrencyStamp = "d7863fa7-03b7-4ed2-a5aa-4aee97ec6c10",
                             Email = "florist@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "florist@mail.com",
                             NormalizedUserName = "florist@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPYfpimdVMgyTymlDd/BiMNDCA6+27oh6TlSuldX3vIkrZIYUbr8e6D4OaLppdIBow==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK28/VoHb1ku5Zd1FngwoF8J5cR8yr7r6/2f3ONDDgbg0s+NTCugf4/qEnDoadiQ6A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7a7b03aa-3df6-4fb1-98a2-32bab500b550",
+                            SecurityStamp = "51cc5957-6243-4c22-977a-dc40306c95ee",
                             TwoFactorEnabled = false,
                             UserName = "florist@mail.com"
                         },
@@ -475,15 +475,15 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49d5978f-4211-42c5-92f7-45bc4778ab58",
+                            ConcurrencyStamp = "cdf8099f-0a90-4f0f-bb3d-3689523997f2",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKIdf26uzJkGBWnisrs297zl/Iy0CbXrNyBKB3sZN7mDOqU3R3Tvv5gJswaIRlY0/Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBgQ7Oiim64so2eaHTM6dLV99pltlnyw2XoU65YxwqiTTjpTEmRBkSw+LE7qob0BMA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "55588602-7e4b-4cfc-8d5b-5f59e0e99d82",
+                            SecurityStamp = "928d3673-33b8-493c-aa5f-7fa605d14842",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
