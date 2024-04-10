@@ -15,14 +15,21 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.Common
         {
             context = _context;
         }
-        public IQueryable<T> All<T>()
+
+        private DbSet<T> DbSet<T>() where T : class 
         {
-            throw new NotImplementedException();
+            return context.Set<T>();
         }
 
-        public IQueryable<T> AllReadOnly<T>()
+        public IQueryable<T> All<T>() where T : class
         {
-            throw new NotImplementedException();
+            return DbSet<T>();
+        }
+
+        public IQueryable<T> AllReadOnly<T>() where T : class
+        {
+            return DbSet<T>()
+                .AsNoTracking();
         }
     }
 }
