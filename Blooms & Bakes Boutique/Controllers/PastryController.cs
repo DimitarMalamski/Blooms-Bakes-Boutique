@@ -55,6 +55,16 @@ namespace Blooms___Bakes_Boutique.Controllers
 			return RedirectToAction(nameof(AllPastry));
 		}
 
+		[HttpPost]
+		public async Task<IActionResult> Taste(int id)
+		{
+			return RedirectToAction(nameof(MinePastry));
+		}
 
+		[HttpPost]
+		public async Task<IActionResult> Untaste(int id)
+		{
+			return RedirectToAction(nameof(MinePastry));
+		}
 	}
 }
