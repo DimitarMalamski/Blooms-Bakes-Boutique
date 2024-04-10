@@ -22,7 +22,7 @@ namespace Blooms___Bakes_Boutique.Controllers
             //flowerService = _flowerService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
