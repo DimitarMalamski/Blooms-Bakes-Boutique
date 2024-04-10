@@ -1,5 +1,23 @@
 ﻿<ul class="navbar-nav flex-grow-1">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-    </li>  
+        <a class="nav-link text-dark" asp-area="" asp-controller="Pastry" asp-action="AllPastry">All Pastries</a>
+    </li> 
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Flower" asp-action="AllFlower">All Flowers</a>
+    </li>
+    @if (this.User?.Identity?.IsAuthenticated ?? false)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Pastry" asp-action="MinePastry">My Pastries</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Flower" asp-action="MineFlower">My Flowers</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Pastry" asp-action="AddPastry">Add Pastries</a>
+        </li>      
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Flower" asp-action="AddFlower">Add Flowers</a>
+        </li>
+    }
 </ul>
