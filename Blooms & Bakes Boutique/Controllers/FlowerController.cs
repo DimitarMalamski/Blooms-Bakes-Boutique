@@ -53,5 +53,17 @@ namespace Blooms___Bakes_Boutique.Controllers
 		{
 			return RedirectToAction(nameof(AllFlower));
 		}
+
+		[HttpPost]
+		public async Task<IActionResult> Gather(int id)
+		{
+			return RedirectToAction(nameof(MineFlower));
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Ungather(int id)
+		{
+			return RedirectToAction(nameof(MineFlower));
+		}
 	}
 }
