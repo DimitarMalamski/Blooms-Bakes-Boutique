@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blooms___Bakes_Boutique.Infrastructure.Data.Common
 {
-    public class Repository
+    public class Repository : IRepository
     {
 
     }

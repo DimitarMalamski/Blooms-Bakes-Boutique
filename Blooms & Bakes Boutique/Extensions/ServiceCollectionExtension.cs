@@ -1,4 +1,9 @@
-﻿using Blooms___Bakes_Boutique.Infrastructure.Data;
+﻿using Blooms___Bakes_Boutique.Core.Contracts.Flower;
+using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
+using Blooms___Bakes_Boutique.Core.Services.Flower;
+using Blooms___Bakes_Boutique.Core.Services.Pastry;
+using Blooms___Bakes_Boutique.Infrastructure.Data;
+using Blooms___Bakes_Boutique.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
@@ -9,6 +14,9 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IPastryService, PastryService>();
+            services.AddScoped<IFlowerService, FlowerService>();
+
             return services;
         }
 
@@ -17,6 +25,8 @@ namespace Microsoft.Extensions.DependencyInjection
             var connectionString = config.GetConnectionString("DefaultConnection");
             services.AddDbContext<BloomsAndBakesDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            services.AddScoped<IRepository, Blooms___Bakes_Boutique.Infrastructure.Data.Common.Repository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
