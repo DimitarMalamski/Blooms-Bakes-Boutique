@@ -5,24 +5,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blooms___Bakes_Boutique.Controllers
 {
-    [Authorize]
-    public class FlowerController : Controller
+    public class FlowerController : BaseController
     {
         [AllowAnonymous]
+		[HttpGet]
 		public async Task<IActionResult> AllFlower()
 		{
 			return View(new AllFlowersQueryModel());
 		}
+
+		[HttpGet]
 		public async Task<IActionResult> MineFlower()
 		{
 			return View(new AllFlowersQueryModel());
 		}
 
+		[HttpGet]
 		public async Task<IActionResult> FlowerDetails(int id)
 		{
 			return View(new FlowerDetailsViewModel());
 		}
 
+		[HttpGet]
 		public async Task<IActionResult> AddFlower()
 		{
 			return View();
@@ -33,6 +37,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 		{
 			return RedirectToAction(nameof(FlowerDetails), new { id = "1" });
 		}
+
+		[HttpGet]
 		public async Task<IActionResult> EditFlower(int id)
 		{
 			return View(new FlowerFormModel());
@@ -43,6 +49,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 		{
 			return RedirectToAction(nameof(FlowerDetails), new { id = "1" });
 		}
+
+		[HttpGet]
 		public async Task<IActionResult> DeleteFlower(int id)
 		{
 			return View(new FlowerFormModel());

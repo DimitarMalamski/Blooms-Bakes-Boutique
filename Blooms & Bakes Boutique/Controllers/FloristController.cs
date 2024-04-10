@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blooms___Bakes_Boutique.Controllers
 {
-    [Authorize]
-    public class FloristController : Controller
+    public class FloristController : BaseController
     {
 		[HttpGet]
 		public async Task<IActionResult> BecomeFlorist()

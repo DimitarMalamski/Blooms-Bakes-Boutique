@@ -4,26 +4,29 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blooms___Bakes_Boutique.Controllers
 {
-    [Authorize]
-    public class PastryController : Controller
+    public class PastryController : BaseController
     {
         [AllowAnonymous]
+		[HttpGet]
         public async Task<IActionResult> AllPastry()
         {
             return View(new AllPastriesQueryModel());
         }
 
-        public async Task<IActionResult> MinePastry()
+		[HttpGet]
+		public async Task<IActionResult> MinePastry()
         {
             return View(new AllPastriesQueryModel());
         }
 
+		[HttpGet]
         public async Task<IActionResult> PastryDetails(int id)
         {
             return View(new PastryDetailsViewModel());
         }
 
-        public async Task<IActionResult> AddPastry()
+		[HttpGet]
+		public async Task<IActionResult> AddPastry()
         {
             return View();
         }
@@ -34,6 +37,7 @@ namespace Blooms___Bakes_Boutique.Controllers
             return RedirectToAction(nameof(PastryDetails), new { id = "1" });
 		}
 
+		[HttpGet]
 		public async Task<IActionResult> EditPastry(int id)
 		{
             return View(new PastryFormModel());
@@ -44,6 +48,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 		{
 			return RedirectToAction(nameof(PastryDetails), new { id = "1" });
 		}
+
+		[HttpGet]
 		public async Task<IActionResult> DeletePastry(int id)
 		{
 			return View(new PastryFormModel());
