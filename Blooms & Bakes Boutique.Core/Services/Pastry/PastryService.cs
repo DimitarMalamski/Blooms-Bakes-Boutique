@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Blooms___Bakes_Boutique.Core.Services.Pastry
 {
-    public class PastryService
+    public class PastryService : IPastryService
     {
+
     }
 }
