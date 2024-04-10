@@ -11,4 +11,10 @@
     <ProjectReference Include="..\Blooms &amp; Bakes Boutique.Infrastructure\Blooms &amp; Bakes Boutique.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Contracts\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
