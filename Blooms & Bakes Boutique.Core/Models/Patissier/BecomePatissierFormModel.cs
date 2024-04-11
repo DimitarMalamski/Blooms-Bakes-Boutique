@@ -11,7 +11,7 @@ namespace Blooms___Bakes_Boutique.Core.Models.Patissier
             MinimumLength = MasterChefMinLength,
             ErrorMessage = LengthMessage)]
         [Display(Name = "MasterChef Title")]
-        [RegularExpression(@"/[A-Z]/", ErrorMessage = RegexErrorMessage)]
+        [RegularExpression(@"(?=.*?[A-Z]).*", ErrorMessage = RegexErrorMessage)]
         public string MasterChefTitle { get; set; } = null!;
     }
 }
