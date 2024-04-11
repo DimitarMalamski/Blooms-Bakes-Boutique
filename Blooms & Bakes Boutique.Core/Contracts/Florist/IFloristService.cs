@@ -8,6 +8,6 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Florist
 {
     public interface IFloristService
     {
-
+        Task<bool> ExistById(string userId);
     }
 }

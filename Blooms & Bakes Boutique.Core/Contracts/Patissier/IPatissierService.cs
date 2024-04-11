@@ -8,6 +8,6 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Patissier
 {
     public interface IPatissierService
     {
-
-    }
+		Task<bool> ExistById(string userId);
+	}
 }
