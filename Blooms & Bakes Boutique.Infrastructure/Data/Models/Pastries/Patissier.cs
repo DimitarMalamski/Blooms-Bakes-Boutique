@@ -11,7 +11,8 @@ using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Past
 
 namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry
 {
-    [Comment("Pastry's Patissier/Chef")]
+	[Index(nameof(MasterChefTitle), IsUnique = true)]
+	[Comment("Pastry's Patissier/Chef")]
     public class Patissier
     {
         [Key]
