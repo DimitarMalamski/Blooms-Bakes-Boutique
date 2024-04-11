@@ -11,6 +11,7 @@ using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Flow
 
 namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers
 {
+    [Index(nameof(FlowerMasterTitle), IsUnique = true)]
     [Comment("Flower's Florist")]
     public class Florist
     {
