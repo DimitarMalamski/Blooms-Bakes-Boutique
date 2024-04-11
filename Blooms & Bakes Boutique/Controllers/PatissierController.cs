@@ -1,5 +1,6 @@
 ﻿using Blooms___Bakes_Boutique.Core.Contracts.Patissier;
 using Blooms___Bakes_Boutique.Core.Models.Patissier;
+using Blooms___Bakes_Boutique.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,11 @@ namespace Blooms___Bakes_Boutique.Controllers
         [HttpGet]
         public async Task<IActionResult> BecomePatissier()
         {
+            if (await patissierService.ExistById(User.Id()))
+            {
+                return BadRequest();
+            }
+
             var model = new BecomePatissierFormModel();
 
             return View(model);
