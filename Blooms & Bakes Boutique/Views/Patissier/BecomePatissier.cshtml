@@ -1,6 +1,32 @@
-﻿@{
-	ViewBag.Title = "Become Patissier";
-}
+﻿@model BecomePatissierFormModel 
 
-<h2 class="text-center">Become <a style="color: #f075a0">Patissier</a></h2>
-<hr />
+@{
+	ViewBag.Title = "Become Patissier";
+} 
+<h2 class="text-center" style="padding-top: 8.5em">Become <a style="color: #f075a0">Patissier</a></h2>
+
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"] != null)
+{
+	 <div class="alert alert-danger" role="alert"> 
+		 @ViewData.ModelState["Error"].Errors.First().ErrorMessage
+	</div>
+}    
+
+<div class="row"> 
+	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6"> 
+		<form method="post"> 
+			<div class="form-group">
+				<label asp-for="MasterChefTitle" style="color: #f075a0; padding-bottom: 0.5em; padding-top: 1em; font-size: 20px"></label>
+				<input asp-for="MasterChefTitle" class="form-control" placeholder="MasterChef [Name]" style="margin-bottom: 0.5em">
+				<span asp-validation-for="MasterChefTitle" class="small text-danger"></span>
+			</div> 
+			<div class="text-center" style="padding-top: 0.5em">
+				<input class="btn btn-primary mt-3" style="background-color: lightpink; border: 2px solid #f075a0;" type="submit" value="Save" />
+			</div> 
+		</form> 
+	</div> 
+</div> 
+
+@section Scripts {
+	 <partial name="_ValidationScriptsPartial" />	 
+}
