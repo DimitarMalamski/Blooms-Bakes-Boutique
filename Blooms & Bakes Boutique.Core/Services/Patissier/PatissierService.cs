@@ -18,9 +18,15 @@ namespace Blooms___Bakes_Boutique.Core.Services.Patissier
 			repository = _repository;
 		}
 
-		public Task CreateAsync(string userId, string masterChefTitle)
+		public async Task CreateAsync(string userId, string masterChefTitle)
 		{
-			throw new NotImplementedException();
+			await repository.AddAsync(new Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Patissier()
+			{
+				UserId = userId,
+				MasterChefTitle = masterChefTitle
+			});
+
+			await repository.SaveChangesAsync();
 		}
 
 		public async Task<bool> ExistByIdAsync(string userId)
@@ -29,14 +35,16 @@ namespace Blooms___Bakes_Boutique.Core.Services.Patissier
 				.AnyAsync(a => a.UserId == userId);
 		}
 
-		public Task<bool> UserHasLikedPatriesAsync(string userId)
+		public async Task<bool> UserHasTastedPatriesAsync(string userId)
 		{
-			throw new NotImplementedException();
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Pastry>()
+				.AnyAsync(p => p.TasterId == userId);
 		}
 
-		public Task<bool> UserWithMasterChefTitleExistsAsync(string masterChefTitle)
+		public async Task<bool> UserWithMasterChefTitleExistsAsync(string masterChefTitle)
 		{
-			throw new NotImplementedException();
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Patissier>()
+				.AnyAsync(pa => pa.MasterChefTitle == masterChefTitle);
 		}
 	}
 }
