@@ -6,7 +6,7 @@
 
 		Task<bool> UserWithMasterChefTitleExistsAsync(string masterChefTitle);
 
-		Task<bool> UserHasLikedPatriesAsync(string userId);
+		Task<bool> UserHasTastedPatriesAsync(string userId);
 
 		Task CreateAsync(string userId, string masterChefTitle);
 	}
