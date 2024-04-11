@@ -29,7 +29,7 @@ namespace Blooms___Bakes_Boutique.Controllers
         [NotAFlorist]
         public async Task<IActionResult> BecomeFlorist(BecomeFloristFormModel model)
 		{
-            if (await floristService.UserWithFlowerMasterTitleExistsAsync(User.Id()))
+            if (await floristService.UserWithFlowerMasterTitleExistsAsync(model.FlowerMasterTitle))
             {
                 ModelState.AddModelError(nameof(model.FlowerMasterTitle), FlowerMasterTitleExists);
             }

@@ -30,7 +30,7 @@ namespace Blooms___Bakes_Boutique.Controllers
         [NotAPatissier]
         public async Task<IActionResult> BecomePatissier(BecomePatissierFormModel model)
         {
-            if (await patissierService.UserWithMasterChefTitleExistsAsync(User.Id()))
+            if (await patissierService.UserWithMasterChefTitleExistsAsync(model.MasterChefTitle))
             {
                 ModelState.AddModelError(nameof(model.MasterChefTitle), MasterChefTitleExists);
             }
