@@ -20,7 +20,7 @@ namespace Blooms___Bakes_Boutique.Controllers
 		[HttpGet]
 		public async Task<IActionResult> BecomeFlorist()
 		{
-			if (await floristService.ExistById(User.Id()))
+			if (await floristService.ExistByIdAsync(User.Id()))
 			{
 				return BadRequest();
 			}

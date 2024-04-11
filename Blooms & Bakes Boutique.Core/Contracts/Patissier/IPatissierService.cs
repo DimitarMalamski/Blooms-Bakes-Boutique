@@ -2,12 +2,12 @@
 {
 	public interface IPatissierService
     {
-		Task<bool> ExistById(string userId);
+		Task<bool> ExistByIdAsync(string userId);
 
-		Task<bool> UserWithMasterChefTitleExists(string masterChefTitle);
+		Task<bool> UserWithMasterChefTitleExistsAsync(string masterChefTitle);
 
-		Task<bool> UserHasLikedPatries(string userId);
+		Task<bool> UserHasLikedPatriesAsync(string userId);
 
-		Task Create(string userId, string masterChefTitle);
+		Task CreateAsync(string userId, string masterChefTitle);
 	}
 }

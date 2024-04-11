@@ -18,7 +18,7 @@ namespace Blooms___Bakes_Boutique.Controllers
         [HttpGet]
         public async Task<IActionResult> BecomePatissier()
         {
-            if (await patissierService.ExistById(User.Id()))
+            if (await patissierService.ExistByIdAsync(User.Id()))
             {
                 return BadRequest();
             }

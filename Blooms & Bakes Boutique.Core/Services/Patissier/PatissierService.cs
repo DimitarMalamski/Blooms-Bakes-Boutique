@@ -18,23 +18,23 @@ namespace Blooms___Bakes_Boutique.Core.Services.Patissier
 			repository = _repository;
 		}
 
-		public Task Create(string userId, string masterChefTitle)
+		public Task CreateAsync(string userId, string masterChefTitle)
 		{
 			throw new NotImplementedException();
 		}
 
-		public async Task<bool> ExistById(string userId)
+		public async Task<bool> ExistByIdAsync(string userId)
 		{
 			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Patissier>()
 				.AnyAsync(a => a.UserId == userId);
 		}
 
-		public Task<bool> UserHasLikedPatries(string userId)
+		public Task<bool> UserHasLikedPatriesAsync(string userId)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<bool> UserWithMasterChefTitleExists(string masterChefTitle)
+		public Task<bool> UserWithMasterChefTitleExistsAsync(string masterChefTitle)
 		{
 			throw new NotImplementedException();
 		}

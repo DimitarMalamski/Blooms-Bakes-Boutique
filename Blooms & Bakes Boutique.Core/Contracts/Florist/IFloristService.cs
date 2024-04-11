@@ -2,12 +2,12 @@
 {
 	public interface IFloristService
     {
-        Task<bool> ExistById(string userId);
+        Task<bool> ExistByIdAsync(string userId);
 
-        Task<bool> UserWithFlowerMasterTitleExists(string flowerMasterTitle);
+        Task<bool> UserWithFlowerMasterTitleExistsAsync(string flowerMasterTitle);
 
-        Task<bool> UserHasGatheredFlowers(string userId);
+        Task<bool> UserHasGatheredFlowersAsync(string userId);
 
-        Task Create(string userId, string flowerMasterTitle);
+        Task CreateAsync(string userId, string flowerMasterTitle);
 	}
 }
