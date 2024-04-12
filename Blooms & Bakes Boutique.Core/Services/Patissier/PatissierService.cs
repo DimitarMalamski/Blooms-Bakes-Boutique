@@ -20,7 +20,7 @@ namespace Blooms___Bakes_Boutique.Core.Services.Patissier
 
 		public async Task CreateAsync(string userId, string masterChefTitle)
 		{
-			await repository.AddAsync(new Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Patissier()
+			await repository.AddAsync(new Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier()
 			{
 				UserId = userId,
 				MasterChefTitle = masterChefTitle
@@ -31,19 +31,25 @@ namespace Blooms___Bakes_Boutique.Core.Services.Patissier
 
 		public async Task<bool> ExistByIdAsync(string userId)
 		{
-			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Patissier>()
-				.AnyAsync(a => a.UserId == userId);
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier>()
+				.AnyAsync(pa => pa.UserId == userId);
+		}
+
+		public async Task<int?> GetPatissierIdAsync(string userId)
+		{
+			return (await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier>()
+				.FirstOrDefaultAsync(pa => pa.UserId == userId))?.Id;
 		}
 
 		public async Task<bool> UserHasTastedPatriesAsync(string userId)
 		{
-			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Pastry>()
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>()
 				.AnyAsync(p => p.TasterId == userId);
 		}
 
 		public async Task<bool> UserWithMasterChefTitleExistsAsync(string masterChefTitle)
 		{
-			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry.Patissier>()
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier>()
 				.AnyAsync(pa => pa.MasterChefTitle == masterChefTitle);
 		}
 	}
