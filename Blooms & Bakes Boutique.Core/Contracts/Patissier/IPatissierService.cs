@@ -9,5 +9,7 @@
 		Task<bool> UserHasTastedPatriesAsync(string userId);
 
 		Task CreateAsync(string userId, string masterChefTitle);
+
+		Task<int?> GetPatissierIdAsync(string userId);
 	}
 }
