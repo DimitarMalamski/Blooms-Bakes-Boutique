@@ -1,11 +1,26 @@
-﻿using Blooms___Bakes_Boutique.Core.Models.Pastry;
+﻿using Blooms___Bakes_Boutique.Attributes;
+using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
+using Blooms___Bakes_Boutique.Core.Contracts.Patissier;
+using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Blooms___Bakes_Boutique.Controllers
 {
     public class PastryController : BaseController
     {
+		private readonly IPastryService pastryService;
+		private readonly IPatissierService patissierService;
+
+        public PastryController(
+			IPastryService _pastryService,
+			IPatissierService _patissierService)
+        {
+			pastryService = _pastryService;
+			patissierService = _patissierService;
+        }
+
         [AllowAnonymous]
 		[HttpGet]
         public async Task<IActionResult> AllPastry()
@@ -26,15 +41,38 @@ namespace Blooms___Bakes_Boutique.Controllers
         }
 
 		[HttpGet]
+		[MustBePatissier]
 		public async Task<IActionResult> AddPastry()
-        {
-            return View();
+		{
+			var model = new PastryFormModel()
+			{
+				PastryCategories = await pastryService.AllPastryCategoriesAsync()
+			};
+
+			return View(model);
         }
 
 		[HttpPost]
+		[MustBePatissier]
 		public async Task<IActionResult> AddPastry(PastryFormModel model)
 		{
-            return RedirectToAction(nameof(PastryDetails), new { id = "1" });
+			if (await pastryService.PastryCategoryExistsAsync(model.CategoryId) == false)
+			{
+				ModelState.AddModelError(nameof(model.CategoryId), "");
+			}
+
+			if (ModelState.IsValid == false)
+			{
+				model.PastryCategories = await pastryService.AllPastryCategoriesAsync();
+
+				return View(model);
+			}
+
+			int? patissierId = await patissierService.GetPatissierIdAsync(User.Id());
+
+			int newPastryId = await pastryService.CreateAsync(model, patissierId ?? 0);
+
+            return RedirectToAction(nameof(PastryDetails), new { id = newPastryId });
 		}
 
 		[HttpGet]
