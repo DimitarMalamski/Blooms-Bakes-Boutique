@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Pastries.Patissier;
 
-namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry
+namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries
 {
 	[Index(nameof(MasterChefTitle), IsUnique = true)]
 	[Comment("Pastry's Patissier/Chef")]
