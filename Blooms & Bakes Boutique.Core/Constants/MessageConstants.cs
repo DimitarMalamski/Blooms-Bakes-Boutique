@@ -15,5 +15,7 @@
 		public const string MasterChefTitleExists = "MasterChef title already exists! Enter another one.";
 
 		public const string HasTasted = "You should have no tasted pastries to become a patissier!";
+
+		public const string PriceErrorMessage = "Price Of Pastry must be a positive number and less than {2} leva!";
 	}
 }
