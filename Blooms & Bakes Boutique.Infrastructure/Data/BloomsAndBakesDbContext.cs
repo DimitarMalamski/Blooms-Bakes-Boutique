@@ -1,5 +1,5 @@
 ﻿using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers;
-using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastry;
+using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries;
 using Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb.CategoryConfiguration;
 using Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb.ProductConfiguration;
 using Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb.RoleConfiguration;
