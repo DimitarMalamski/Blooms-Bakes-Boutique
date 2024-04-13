@@ -1,0 +1,35 @@
+﻿@model PastryServiceModel 
+
+<div class="col-md-4"> 
+	<div class="card mb-3"> 
+		<img class="card-img-top" src="@Model.ImageUrl" alt="House Image"> 
+		<div class="card-body text-center"> 
+			<h4>@Model.Title</h4> 
+			<h6>Description: <b>@Model.Description</b></h6>
+			<h6> Price Of Pastry: 
+				<b>@String.Format("{0:f2}", Model.Price) BGN</b>
+			</h6>
+			<h6>(@(Model.IsTasted ? "Tasted" : "Not Tasted"))</h6>
+			<br /> 
+			<a asp-controller="Pastry" asp-action="PastryDetails" asp-route-id="@Model.Id" class="btn btn-success">Details</a> 
+			@if (this.User.Identity.IsAuthenticated) 
+			{
+				<a asp-controller="Pastry" asp-action="EditPastry" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+				<a asp-controller="Pastry" asp-action="DeletePastry" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+				<p></p> 
+					@if (!Model.IsTasted)
+					{
+						<form class="input-group-sm" asp-controller="Pastry" asp-action="Taste" asp-route-id="@Model.Id" method="post">
+						<input class="btn btn-primary" type="submit" value="Taste" />
+						</form>
+					}
+					else
+					{
+						<form asp-controller="Pastry" asp-action="Untaste" asp-route-id="@Model.Id" method="post">
+						<input class="btn btn-primary" type="submit" value="Untaste" />
+					</form>
+					} 
+			}
+		</div>
+	</div>
+</div>
