@@ -1,4 +1,5 @@
 ﻿using Blooms___Bakes_Boutique.Core.Contracts.Flower;
+using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Common;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,20 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
         {
             repository = _repository;
         }
-    }
+
+		public Task<IEnumerable<PastryCategoryServiceModel>> AllFlowerCategoriesAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<int> CreateAsync(PastryFormModel model, int floristId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<bool> FlowerCategoryExistsAsync(int categoryId)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
