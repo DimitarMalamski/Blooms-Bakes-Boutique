@@ -24,9 +24,9 @@ namespace Blooms___Bakes_Boutique.Controllers
 
         [AllowAnonymous]
 		[HttpGet]
-        public async Task<IActionResult> AllPastry()
+        public async Task<IActionResult> AllPastry([FromQuery]AllPastriesQueryModel query)
         {
-            return View(new AllPastriesQueryModel());
+            return View(query);
         }
 
 		[HttpGet]
