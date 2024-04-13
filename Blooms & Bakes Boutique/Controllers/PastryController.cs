@@ -5,6 +5,7 @@ using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static Blooms___Bakes_Boutique.Core.Constants.MessageConstants;
 
 namespace Blooms___Bakes_Boutique.Controllers
 {
@@ -58,7 +59,7 @@ namespace Blooms___Bakes_Boutique.Controllers
 		{
 			if (await pastryService.PastryCategoryExistsAsync(model.CategoryId) == false)
 			{
-				ModelState.AddModelError(nameof(model.CategoryId), "");
+				ModelState.AddModelError(nameof(model.CategoryId), PastryCategoryDoesNotExist);
 			}
 
 			if (ModelState.IsValid == false)
