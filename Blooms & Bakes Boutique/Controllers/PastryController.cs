@@ -26,7 +26,18 @@ namespace Blooms___Bakes_Boutique.Controllers
 		[HttpGet]
         public async Task<IActionResult> AllPastry([FromQuery]AllPastriesQueryModel query)
         {
-            return View(query);
+			var model = await pastryService.AllPastryAsync(
+				query.PastryCategory,
+				query.SearchTerm,
+				query.Sorting,
+				query.CurrentPage,
+				query.PastriesPerPage);
+
+			query.TotalPastriesCount = model.TotalPastriesCount;
+			query.Pastries = model.Pastries;
+			query.PastryCategories = await pastryService.AllPastryCategoriesNamesAsync();
+
+			return View(query);
         }
 
 		[HttpGet]
