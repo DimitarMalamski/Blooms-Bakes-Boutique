@@ -1,6 +1,9 @@
 ﻿using Blooms___Bakes_Boutique.Core.Contracts.Flower;
+using Blooms___Bakes_Boutique.Core.Models.Flower;
 using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Common;
+using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,19 +21,41 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
             repository = _repository;
         }
 
-		public Task<IEnumerable<PastryCategoryServiceModel>> AllFlowerCategoriesAsync()
+		public async Task<IEnumerable<FlowerCategoryServiceModel>> AllFlowerCategoriesAsync()
 		{
-			throw new NotImplementedException();
+			return await repository.AllReadOnly<FlowerCategory>()
+				.Select(fc => new FlowerCategoryServiceModel()
+				{
+					Id = fc.Id,
+					Name = fc.Name
+				})
+				.ToListAsync();
+				
 		}
 
-		public Task<int> CreateAsync(PastryFormModel model, int floristId)
+		public async Task<int> CreateAsync(FlowerFormModel model, int floristId)
 		{
-			throw new NotImplementedException();
+			Infrastructure.Data.Models.Flowers.Flower flower = new Infrastructure.Data.Models.Flowers.Flower()
+			{
+				Title = model.Title,
+				Description = model.Description,
+				Colour = model.Colour,
+				ImageUrl = model.ImageUrl,
+				PricePerBouquet = model.PricePerBouquet,
+				FloristId = floristId,
+				CategoryId = model.CategoryId
+			};
+
+			await repository.AddAsync(flower);
+			await repository.SaveChangesAsync();
+
+			return flower.Id;
 		}
 
-		public Task<bool> FlowerCategoryExistsAsync(int categoryId)
+		public async Task<bool> FlowerCategoryExistsAsync(int categoryId)
 		{
-			throw new NotImplementedException();
+			return await repository.AllReadOnly<FlowerCategory>()
+				.AnyAsync(fc => fc.Id == categoryId);
 		}
 	}
 }
