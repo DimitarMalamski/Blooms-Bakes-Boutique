@@ -2,5 +2,10 @@
 	ViewBag.Title = "Add Flower";
 }
 
-<h2 class="text-center"><a style="color: #f075a0">Add</a> Flower</h2>
-<hr />
+<h2 class="text-center" style="margin-top: 4em"><a style="color: #f075a0">Add</a> Flower</h2>
+
+<partial name="_FlowerFormPartial" model="@Model" />
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
