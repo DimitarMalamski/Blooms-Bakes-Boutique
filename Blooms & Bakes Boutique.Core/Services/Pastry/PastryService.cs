@@ -1,5 +1,6 @@
 ﻿using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
 using Blooms___Bakes_Boutique.Core.Models.Pastry;
+using Blooms___Bakes_Boutique.Enumerations;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Common;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,67 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
             repository = _repository;
         }
 
+		public async Task<PastryQueryServiceModel> AllPastryAsync(
+            string? pastryCategory = null, 
+            string? searchTerm = null, 
+            PastrySorting sorting = PastrySorting.Newest,
+            int currentPage = 1,
+            int pastryPerPage = 1)
+		{
+            var pastriesToShow = repository.AllReadOnly<Infrastructure.Data.Models.Pastries.Pastry>();
+
+            if (pastryCategory != null)
+            {
+                pastriesToShow = pastriesToShow
+                    .Where(p => p.PastryCategory.Name == pastryCategory);
+
+			}
+
+            if (searchTerm != null)
+            {
+                string normalizedSearchTerm = searchTerm.ToLower();
+
+                pastriesToShow = pastriesToShow
+                    .Where(p => p.Title.ToLower().Contains(normalizedSearchTerm) ||
+                                p.Description.ToLower().Contains(normalizedSearchTerm) ||
+                                p.Recipe.ToLower().Contains(normalizedSearchTerm));
+            }
+
+            pastriesToShow = sorting switch
+            {
+                PastrySorting.PriceOfPastry => pastriesToShow
+                    .OrderByDescending(p => p.Price),
+                PastrySorting.NotTastedFirst => pastriesToShow
+                    .OrderBy(p => p.TasterId == null)
+                    .ThenByDescending(p => p.Id),
+                _ => pastriesToShow
+                    .OrderByDescending(p => p.Id)
+            };
+
+            var pastries = await pastriesToShow
+                .Skip((currentPage - 1) * pastryPerPage)
+                .Take(pastryPerPage)
+                .Select(pastry => new PastryServiceModel()
+                {
+                    Id = pastry.Id,
+                    Description = pastry.Description,
+                    ImageUrl = pastry.ImageUrl,
+                    IsTasted = pastry.TasterId != null,
+                    Price = pastry.Price,
+                    Title = pastry.Title
+                })
+                .ToListAsync();
+
+            int totalPastries = await pastriesToShow.CountAsync();
+
+            return new PastryQueryServiceModel()
+            {
+                Pastries = pastries,
+                TotalPastriesCount = totalPastries
+            };
+
+		}
+
 		public async Task<IEnumerable<PastryCategoryServiceModel>> AllPastryCategoriesAsync()
 		{
             return await repository.AllReadOnly<PastryCategory>()
@@ -24,6 +86,14 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
                     Name = pc.Name
                 })
                 .ToListAsync();
+		}
+
+		public async Task<IEnumerable<string>> AllPastryCategoriesNamesAsync()
+		{
+            return await repository.AllReadOnly<PastryCategory>()
+                .Select(pc => pc.Name)
+                .Distinct()
+                .ToArrayAsync();
 		}
 
 		public async Task<int> CreateAsync(PastryFormModel model, int patissierId)
