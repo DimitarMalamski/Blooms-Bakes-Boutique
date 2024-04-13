@@ -29,6 +29,12 @@ namespace Blooms___Bakes_Boutique.Core.Services.Florist
 				.AnyAsync(fl => fl.UserId == userId);
 		}
 
+		public async Task<int?> GetFloristIdAsync(string userId)
+		{
+			return (await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Florist>()
+				.FirstOrDefaultAsync(pa => pa.UserId == userId))?.Id;
+		}
+
 		public async Task<bool> UserHasGatheredFlowersAsync(string userId)
 		{
 			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
