@@ -17,5 +17,9 @@
 		public const string HasTasted = "You should have no tasted pastries to become a patissier!";
 
 		public const string PriceErrorMessage = "Price Of Pastry must be a positive number and less than {2} leva!";
+
+		public const string FlowerCategoryDoesNotExist = "Flower Category does not exist!";
+
+		public const string PastryCategoryDoesNotExist = "Pastry Category does not exist!";
 	}
 }
