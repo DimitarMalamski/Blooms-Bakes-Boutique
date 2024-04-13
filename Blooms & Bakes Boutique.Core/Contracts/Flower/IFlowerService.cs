@@ -1,5 +1,6 @@
 ﻿using Blooms___Bakes_Boutique.Core.Models.Flower;
 using Blooms___Bakes_Boutique.Core.Models.Pastry;
+using Blooms___Bakes_Boutique.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,14 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Flower
 		Task<bool> FlowerCategoryExistsAsync(int categoryId);
 
 		Task<int> CreateAsync(FlowerFormModel model, int floristId);
+
+		Task<FlowerQueryServiceModel> AllFlowerAsync(
+			string? flowerCategory = null,
+			string? searchTerm = null,
+			FlowerSorting sorting = FlowerSorting.Newest,
+			int currentPage = 1,
+			int flowerPerPage = 1);
+
+		Task<IEnumerable<string>> AllFlowerCategoriesNamesAsync();
 	}
 }
