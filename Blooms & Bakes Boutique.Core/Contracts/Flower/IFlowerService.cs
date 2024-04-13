@@ -1,4 +1,5 @@
-﻿using Blooms___Bakes_Boutique.Core.Models.Pastry;
+﻿using Blooms___Bakes_Boutique.Core.Models.Flower;
+using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Flower
 {
     public interface IFlowerService
     {
-		Task<IEnumerable<PastryCategoryServiceModel>> AllFlowerCategoriesAsync();
+		Task<IEnumerable<FlowerCategoryServiceModel>> AllFlowerCategoriesAsync();
 
 		Task<bool> FlowerCategoryExistsAsync(int categoryId);
 
-		Task<int> CreateAsync(PastryFormModel model, int floristId);
+		Task<int> CreateAsync(FlowerFormModel model, int floristId);
 	}
 }
