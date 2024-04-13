@@ -9,5 +9,7 @@
         Task<bool> UserHasGatheredFlowersAsync(string userId);
 
         Task CreateAsync(string userId, string flowerMasterTitle);
+
+        Task<int?> GetFloristIdAsync(string userId);
 	}
 }
