@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Blooms___Bakes_Boutique.Core.Models.Pastry
+﻿namespace Blooms___Bakes_Boutique.Core.Models.Pastry
 {
 	public class PastryQueryServiceModel
 	{
+        public int TotalPastriesCount { get; set; }
 
-	}
+        public IEnumerable<PastryServiceModel> Pastries { get; set; } =
+            new List<PastryServiceModel>();
+    }
 }
