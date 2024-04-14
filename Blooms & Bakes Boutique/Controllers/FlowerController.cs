@@ -115,13 +115,49 @@ namespace Blooms___Bakes_Boutique.Controllers
 		[HttpGet]
 		public async Task<IActionResult> EditFlower(int id)
 		{
-			return View(new FlowerFormModel());
+			if (await flowerService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await flowerService.HasFloristWithIdAsync(id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+			var model = await flowerService.GetFlowerFormModelByIdAsync(id);
+
+			return View(model);
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> EditFlower(int id, FlowerFormModel model)
 		{
-			return RedirectToAction(nameof(FlowerDetails), new { id = "1" });
+			if (await flowerService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await flowerService.HasFloristWithIdAsync(id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+			if (await flowerService.FlowerCategoryExistsAsync(model.CategoryId) == false)
+			{
+				ModelState.AddModelError(nameof(model.CategoryId), FlowerCategoryDoesNotExist);
+			}
+
+			if (ModelState.IsValid == false)
+			{
+				model.FlowerCategories = await flowerService.AllFlowerCategoriesAsync();
+
+				return View(model);
+			}
+
+			await flowerService.EditAsync(id, model);
+
+			return RedirectToAction(nameof(FlowerDetails), new { id = id });
 		}
 
 		[HttpGet]

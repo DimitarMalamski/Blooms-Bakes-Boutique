@@ -110,13 +110,49 @@ namespace Blooms___Bakes_Boutique.Controllers
 		[HttpGet]
 		public async Task<IActionResult> EditPastry(int id)
 		{
-            return View(new PastryFormModel());
+			if (await pastryService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await pastryService.HasPatissierWithIdAsync(id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+			var model = await pastryService.GetPastryFormModelByIdAsync(id);
+
+			return View(model);
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> EditPastry(int id, PastryFormModel model)
 		{
-			return RedirectToAction(nameof(PastryDetails), new { id = "1" });
+			if (await pastryService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await pastryService.HasPatissierWithIdAsync(id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+			if (await pastryService.PastryCategoryExistsAsync(model.CategoryId) == false)
+			{
+				ModelState.AddModelError(nameof(model.CategoryId), PastryCategoryDoesNotExist);
+			}
+
+			if (ModelState.IsValid == false)
+			{
+				model.PastryCategories = await pastryService.AllPastryCategoriesAsync();
+
+				return View(model);
+			}
+
+			await pastryService.EditAsync(id, model);
+
+			return RedirectToAction(nameof(PastryDetails), new { id = id });
 		}
 
 		[HttpGet]
