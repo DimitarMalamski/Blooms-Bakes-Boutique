@@ -4,6 +4,7 @@ using Blooms___Bakes_Boutique.Enumerations;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Common;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Pastries;
 
 namespace Blooms___Bakes_Boutique.Core.Services.Pastry
@@ -124,10 +125,39 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
             return pastry.Id;
 		}
 
+		public async Task<bool> ExistsAsync(int id)
+		{
+            return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>()
+                .AnyAsync(p => p.Id == id);
+		}
+
 		public async Task<bool> PastryCategoryExistsAsync(int categoryId)
 		{
             return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.PastryCategory>()
                 .AnyAsync(pc => pc.Id == categoryId);
+		}
+
+		public async Task<PastryDetailsServiceModel> PastryDetailsByIdAsync(int id)
+		{
+            return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>()
+                .Where(p => p.Id == id)
+                .Select(p => new PastryDetailsServiceModel()
+                {
+                    Id = p.Id,
+                    Description = p.Description,
+                    Patissier = new Models.Patissier.PatissierServiceModel()
+                    {
+                        UserName = p.Patissier.User.UserName,
+                        MasterChefTitle = p.Patissier.MasterChefTitle
+                    },
+                    PastryCategory = p.PastryCategory.Name,
+                    Recipe = p.Recipe,
+                    ImageUrl = p.ImageUrl,
+                    IsTasted = p.TasterId != null,
+                    Price = p.Price,
+                    Title = p.Title
+                })
+                .FirstAsync();
 		}
 	}
 }
