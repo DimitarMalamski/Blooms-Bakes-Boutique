@@ -1,0 +1,36 @@
+﻿@model FlowerServiceModel
+
+<div class="col-md-4">
+	<div class="card mb-3">
+		<img class="card-img-top" src="@Model.ImageUrl" alt="Flower Image">
+		<div class="card-body text-center">
+			<h4>@Model.Title</h4>
+			<h6>Colour: <b>@Model.Colour</b></h6>
+			<h6>
+				Price Per Bouquet:
+				<b>@String.Format("{0:f2}", Model.PricePerBouquet) BGN</b>
+			</h6>
+			<h6>(@(Model.IsGathered ? "Gathered" : "Not Gathered"))</h6>
+			<br />
+			<a asp-controller="Flower" asp-action="FlowerDetails" asp-route-id="@Model.Id" class="btn btn-success" style="background-color: #de8eaa; border: 2px solid #db799b; color: white">Details</a>
+			@if (this.User.Identity.IsAuthenticated)
+			{
+				<a asp-controller="Flower" asp-action="EditFlower" asp-route-id="@Model.Id" class="btn btn-warning" style="background-color: #e34d82; border: 2px solid #e04179; color: white">Edit</a>
+				<a asp-controller="Flower" asp-action="DeleteFlower" asp-route-id="@Model.Id" class="btn btn-danger" style="background-color: #eb286d; border: 2px solid #e61962; color: white">Delete</a>
+				<p></p>
+				@if (!Model.IsGathered)
+				{
+					<form class="input-group-sm" asp-controller="Flower" asp-action="Gather" asp-route-id="@Model.Id" method="post">
+						<input class="btn btn-primary" style="background-color: #d9a5b8; border: 2px solid #d694ac; color: white" type="submit" value="Gather" />
+					</form>
+				}
+				else
+				{
+					<form asp-controller="Flower" asp-action="Ungather" asp-route-id="@Model.Id" method="post">
+						<input class="btn btn-primary" style="background-color: #912049; border: 2px solid #80183e; color: white" type="submit" value="Ungather" />
+					</form>
+				}
+			}
+		</div>
+	</div>
+</div>
