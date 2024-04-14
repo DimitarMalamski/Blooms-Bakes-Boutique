@@ -94,6 +94,22 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
 				.ToArrayAsync();
 		}
 
+		public async Task<IEnumerable<FlowerServiceModel>> AllFlowersByFloristIdAsync(int floristId)
+		{
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
+				.Where(f => f.FloristId == floristId)
+				.ProjectToFlowerServiceModel()
+				.ToListAsync();
+		}
+
+		public async Task<IEnumerable<FlowerServiceModel>> AllFlowersByUserId(string userId)
+		{
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
+				.Where(f => f.GathererId == userId)
+				.ProjectToFlowerServiceModel()
+				.ToListAsync();
+		}
+
 		public async Task<int> CreateAsync(FlowerFormModel model, int floristId)
 		{
 			Infrastructure.Data.Models.Flowers.Flower flower = new Infrastructure.Data.Models.Flowers.Flower()
