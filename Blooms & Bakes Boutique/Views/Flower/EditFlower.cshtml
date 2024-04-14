@@ -1,6 +1,12 @@
-﻿@{
+﻿@model FlowerFormModel
+@{
 	ViewBag.Title = "Edit Flower";
 }
 
 <h2 class="text-center"><a style="color: #f075a0">Edit</a> Flower</h2>
-<hr />
+
+<partial name="_FlowerFormPartial" model="@Model" />
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" model="@Model" />
+}
