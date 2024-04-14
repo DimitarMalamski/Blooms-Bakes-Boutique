@@ -39,5 +39,7 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Pastry
 
         Task<PastryFormModel?> GetPastryFormModelByIdAsync(int id);
 
+        Task DeleteAsync(int pastryId);
+
 	}
 }
