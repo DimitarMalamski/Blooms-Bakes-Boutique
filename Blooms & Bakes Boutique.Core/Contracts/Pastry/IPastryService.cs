@@ -32,5 +32,12 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Pastry
         Task<bool> ExistsAsync(int id);
 
         Task<PastryDetailsServiceModel> PastryDetailsByIdAsync(int id);
+
+        Task EditAsync(int pastryId, PastryFormModel model);
+
+        Task<bool> HasPatissierWithIdAsync(int pastryId, string userId);
+
+        Task<PastryFormModel?> GetPastryFormModelByIdAsync(int id);
+
 	}
 }
