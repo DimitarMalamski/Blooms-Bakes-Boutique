@@ -25,5 +25,9 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Flower
 			int flowerPerPage = 1);
 
 		Task<IEnumerable<string>> AllFlowerCategoriesNamesAsync();
+
+		Task<IEnumerable<FlowerServiceModel>> AllFlowersByFloristIdAsync(int floristId);
+
+		Task<IEnumerable<FlowerServiceModel>> AllFlowersByUserId(string userId);
 	}
 }
