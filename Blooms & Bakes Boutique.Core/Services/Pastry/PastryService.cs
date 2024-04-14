@@ -125,10 +125,57 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
             return pastry.Id;
 		}
 
+		public async Task EditAsync(int pastryId, PastryFormModel model)
+		{
+            var pastry = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>(pastryId);
+
+            if (pastry != null)
+            {
+                pastry.Description = model.Description;
+                pastry.CategoryId = model.CategoryId;
+                pastry.Recipe = model.Recipe;
+                pastry.ImageUrl = model.ImageUrl;
+                pastry.Price = model.Price;
+                pastry.Title = model.Title;
+
+                await repository.SaveChangesAsync();
+            }
+		}
+
 		public async Task<bool> ExistsAsync(int id)
 		{
             return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>()
                 .AnyAsync(p => p.Id == id);
+		}
+
+		public async Task<PastryFormModel?> GetPastryFormModelByIdAsync(int id)
+		{
+            var pastry = await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>()
+                .Where(p => p.Id == id)
+                .Select(p => new PastryFormModel()
+                {
+                    Description = p.Description,
+                    CategoryId = p.CategoryId,
+                    Recipe = p.Recipe,
+                    ImageUrl = p.ImageUrl,
+                    Price = p.Price,
+                    Title = p.Title,
+                })
+                .FirstOrDefaultAsync();
+
+            if (pastry != null)
+            {
+                pastry.PastryCategories = await AllPastryCategoriesAsync(); 
+			}
+
+            return pastry;
+            
+		}
+
+		public async Task<bool> HasPatissierWithIdAsync(int pastryId, string userId)
+		{
+            return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>()
+                .AnyAsync(p => p.Id == pastryId && p.Patissier.UserId == userId);
 		}
 
 		public async Task<bool> PastryCategoryExistsAsync(int categoryId)

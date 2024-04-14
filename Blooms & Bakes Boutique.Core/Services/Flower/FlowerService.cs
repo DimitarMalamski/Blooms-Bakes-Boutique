@@ -129,6 +129,23 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
 			return flower.Id;
 		}
 
+		public async Task EditAsync(int flowerId, FlowerFormModel model)
+		{
+			var flower = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>(flowerId);
+
+			if (flower != null)
+			{
+				flower.Colour = model.Colour;
+				flower.CategoryId = model.CategoryId;
+				flower.Description = model.Description;
+				flower.ImageUrl = model.ImageUrl;
+				flower.PricePerBouquet = model.PricePerBouquet;
+				flower.Title = model.Title;
+
+				await repository.SaveChangesAsync();
+			}
+		}
+
 		public async Task<bool> ExistsAsync(int id)
 		{
 			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
@@ -162,6 +179,35 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
 					Title = f.Title
 				})
 				.FirstAsync();
+		}
+
+		public async Task<FlowerFormModel?> GetFlowerFormModelByIdAsync(int id)
+		{
+			var flower = await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
+				.Where(f => f.Id == id)
+				.Select(f => new FlowerFormModel()
+				{
+					Colour = f.Colour,
+					CategoryId = f.CategoryId,
+					Description = f.Description,
+					ImageUrl = f.ImageUrl,
+					PricePerBouquet = f.PricePerBouquet,
+					Title = f.Title,
+				})
+				.FirstOrDefaultAsync();
+
+			if (flower != null)
+			{
+				flower.FlowerCategories = await AllFlowerCategoriesAsync();
+			}
+
+			return flower;
+		}
+
+		public async Task<bool> HasFloristWithIdAsync(int flowerId, string userId)
+		{
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
+				.AnyAsync(f => f.Id == flowerId && f.Florist.UserId == userId);
 		}
 	}
 }
