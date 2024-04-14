@@ -129,10 +129,39 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
 			return flower.Id;
 		}
 
+		public async Task<bool> ExistsAsync(int id)
+		{
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
+				.AnyAsync(f => f.Id == id);
+		}
+
 		public async Task<bool> FlowerCategoryExistsAsync(int categoryId)
 		{
 			return await repository.AllReadOnly<FlowerCategory>()
 				.AnyAsync(fc => fc.Id == categoryId);
+		}
+
+		public async Task<FlowerDetailsServiceModel> FlowerDetailsByIdAsync(int id)
+		{
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
+				.Where(f => f.Id == id)
+				.Select(f => new FlowerDetailsServiceModel()
+				{
+					Id = f.Id,
+					Colour = f.Colour,
+					Florist = new Models.Florist.FloristServiceModel()
+					{
+						UserName = f.Florist.User.UserName,
+						FlowerMasterTitle = f.Florist.FlowerMasterTitle
+					},
+					FlowerCategory = f.FlowerCategory.Name,
+					Description = f.Description,
+					ImageUrl = f.ImageUrl,
+					IsGathered = f.GathererId != null,
+					PricePerBouquet = f.PricePerBouquet,
+					Title = f.Title
+				})
+				.FirstAsync();
 		}
 	}
 }
