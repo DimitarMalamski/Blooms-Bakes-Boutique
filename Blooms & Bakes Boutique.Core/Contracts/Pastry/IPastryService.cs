@@ -24,5 +24,9 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Pastry
             int pastryPerPage = 1);
 
         Task<IEnumerable<string>> AllPastryCategoriesNamesAsync();
+
+        Task<IEnumerable<PastryServiceModel>> AllPastriesByPatissierIdAsync(int patissierId);
+
+        Task<IEnumerable<PastryServiceModel>> AllPastriesByUserId(string userId);
 	}
 }
