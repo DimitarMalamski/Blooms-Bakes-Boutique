@@ -22,9 +22,56 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
             repository = _repository;
         }
 
-		public Task<FlowerQueryServiceModel> AllFlowerAsync(string? flowerCategory = null, string? searchTerm = null, FlowerSorting sorting = FlowerSorting.Newest, int currentPage = 1, int flowerPerPage = 1)
+		public async Task<FlowerQueryServiceModel> AllFlowerAsync(
+			string? flowerCategory = null,
+			string? searchTerm = null,
+			FlowerSorting sorting = FlowerSorting.Newest,
+			int currentPage = 1,
+			int flowerPerPage = 1)
 		{
-			throw new NotImplementedException();
+			var flowersToShow = repository.AllReadOnly<Infrastructure.Data.Models.Flowers.Flower>();
+
+			if (flowerCategory != null)
+			{
+				flowersToShow = flowersToShow
+					.Where(p => p.FlowerCategory.Name == flowerCategory);
+
+			}
+
+			if (searchTerm != null)
+			{
+				string normalizedSearchTerm = searchTerm.ToLower();
+
+				flowersToShow = flowersToShow
+					.Where(p => p.Title.ToLower().Contains(normalizedSearchTerm) ||
+								p.Description.ToLower().Contains(normalizedSearchTerm) ||
+								p.Colour.ToLower().Contains(normalizedSearchTerm));
+			}
+
+			flowersToShow = sorting switch
+			{
+				FlowerSorting.PricePerBouquet => flowersToShow
+					.OrderBy(p => p.PricePerBouquet),
+				FlowerSorting.NotGatheredFirst => flowersToShow
+					.OrderByDescending(p => p.GathererId == null)
+					.ThenByDescending(p => p.Id),
+				_ => flowersToShow
+					.OrderByDescending(p => p.Id)
+			};
+
+			var flowers = await flowersToShow
+				.Skip((currentPage - 1) * flowerPerPage)
+				.Take(flowerPerPage)
+				.ProjectToFlowerServiceModel()
+				.ToListAsync();
+
+			int totalFlowers = await flowersToShow.CountAsync();
+
+			return new FlowerQueryServiceModel()
+			{
+				Flowers = flowers,
+				TotalFlowersCount = totalFlowers
+			};
 		}
 
 		public async Task<IEnumerable<FlowerCategoryServiceModel>> AllFlowerCategoriesAsync()
@@ -39,9 +86,12 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
 				
 		}
 
-		public Task<IEnumerable<string>> AllFlowerCategoriesNamesAsync()
+		public async Task<IEnumerable<string>> AllFlowerCategoriesNamesAsync()
 		{
-			throw new NotImplementedException();
+			return await repository.AllReadOnly<FlowerCategory>()
+				.Select(fc => fc.Name)
+				.Distinct()
+				.ToArrayAsync();
 		}
 
 		public async Task<int> CreateAsync(FlowerFormModel model, int floristId)
