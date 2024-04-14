@@ -28,5 +28,9 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Pastry
         Task<IEnumerable<PastryServiceModel>> AllPastriesByPatissierIdAsync(int patissierId);
 
         Task<IEnumerable<PastryServiceModel>> AllPastriesByUserId(string userId);
+
+        Task<bool> ExistsAsync(int id);
+
+        Task<PastryDetailsServiceModel> PastryDetailsByIdAsync(int id);
 	}
 }
