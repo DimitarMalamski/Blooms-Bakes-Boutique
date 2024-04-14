@@ -33,5 +33,11 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Flower
 		Task<bool> ExistsAsync(int id);
 
 		Task<FlowerDetailsServiceModel> FlowerDetailsByIdAsync(int id);
+
+		Task EditAsync(int flowerId, FlowerFormModel model);
+
+		Task<bool> HasFloristWithIdAsync(int flowerId, string userId);
+
+		Task<FlowerFormModel?> GetFlowerFormModelByIdAsync(int id);
 	}
 }
