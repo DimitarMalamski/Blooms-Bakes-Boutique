@@ -29,5 +29,9 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Flower
 		Task<IEnumerable<FlowerServiceModel>> AllFlowersByFloristIdAsync(int floristId);
 
 		Task<IEnumerable<FlowerServiceModel>> AllFlowersByUserId(string userId);
+
+		Task<bool> ExistsAsync(int id);
+
+		Task<FlowerDetailsServiceModel> FlowerDetailsByIdAsync(int id);
 	}
 }
