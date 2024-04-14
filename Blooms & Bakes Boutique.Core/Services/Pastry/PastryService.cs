@@ -4,6 +4,7 @@ using Blooms___Bakes_Boutique.Enumerations;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Common;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries;
 using Microsoft.EntityFrameworkCore;
+using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Pastries;
 
 namespace Blooms___Bakes_Boutique.Core.Services.Pastry
 {
@@ -16,14 +17,20 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
             repository = _repository;
         }
 
-		public Task<IEnumerable<PastryServiceModel>> AllPastriesByPatissierIdAsync(int patissierId)
+		public async Task<IEnumerable<PastryServiceModel>> AllPastriesByPatissierIdAsync(int patissierId)
 		{
-			throw new NotImplementedException();
+            return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>()
+                .Where(p => p.PatissierId == patissierId)
+                .ProjectToPastryServiceModel()
+                .ToListAsync();
 		}
 
-		public Task<IEnumerable<PastryServiceModel>> AllPastriesByUserId(string userId)
+		public async Task<IEnumerable<PastryServiceModel>> AllPastriesByUserId(string userId)
 		{
-			throw new NotImplementedException();
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>()
+				.Where(p => p.TasterId == userId)
+				.ProjectToPastryServiceModel()
+				.ToListAsync();
 		}
 
 		public async Task<PastryQueryServiceModel> AllPastryAsync(
@@ -81,7 +88,7 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
 
 		public async Task<IEnumerable<PastryCategoryServiceModel>> AllPastryCategoriesAsync()
 		{
-            return await repository.AllReadOnly<PastryCategory>()
+            return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.PastryCategory>()
                 .Select(pc => new PastryCategoryServiceModel()
                 {
                     Id = pc.Id,
@@ -92,7 +99,7 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
 
 		public async Task<IEnumerable<string>> AllPastryCategoriesNamesAsync()
 		{
-            return await repository.AllReadOnly<PastryCategory>()
+            return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.PastryCategory>()
                 .Select(pc => pc.Name)
                 .Distinct()
                 .ToArrayAsync();
@@ -119,7 +126,7 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
 
 		public async Task<bool> PastryCategoryExistsAsync(int categoryId)
 		{
-            return await repository.AllReadOnly<PastryCategory>()
+            return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.PastryCategory>()
                 .AnyAsync(pc => pc.Id == categoryId);
 		}
 	}
