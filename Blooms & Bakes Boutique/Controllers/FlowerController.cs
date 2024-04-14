@@ -48,7 +48,20 @@ namespace Blooms___Bakes_Boutique.Controllers
 		[HttpGet]
 		public async Task<IActionResult> MineFlower()
 		{
-			return View(new AllFlowersQueryModel());
+			var userId = User.Id();
+			IEnumerable<FlowerServiceModel> model;
+
+			if (await floristService.ExistByIdAsync(userId))
+			{
+				int floristId = await floristService.GetFloristIdAsync(userId) ?? 0;
+				model = await flowerService.AllFlowersByFloristIdAsync(floristId);
+			}
+			else
+			{
+				model = await flowerService.AllFlowersByUserId(userId);
+			}
+
+			return View(model);
 		}
 
 		[HttpGet]
