@@ -1,6 +1,12 @@
-﻿@{
+﻿@model PastryFormModel
+@{
 	ViewBag.Title = "Edit Pastry";
 }
 
 <h2 class="text-center"><a style="color: #f075a0">Edit</a> Pastry</h2>
-<hr />
+
+<partial name="_PastryFormPartial" model="@Model" />
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" model="@Model" />
+} 
