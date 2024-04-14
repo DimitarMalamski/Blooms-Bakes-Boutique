@@ -16,6 +16,16 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
             repository = _repository;
         }
 
+		public Task<IEnumerable<PastryServiceModel>> AllPastriesByPatissierIdAsync(int patissierId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<IEnumerable<PastryServiceModel>> AllPastriesByUserId(string userId)
+		{
+			throw new NotImplementedException();
+		}
+
 		public async Task<PastryQueryServiceModel> AllPastryAsync(
             string? pastryCategory = null, 
             string? searchTerm = null, 
@@ -45,9 +55,9 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
             pastriesToShow = sorting switch
             {
                 PastrySorting.PriceOfPastry => pastriesToShow
-                    .OrderByDescending(p => p.Price),
+                    .OrderBy(p => p.Price),
                 PastrySorting.NotTastedFirst => pastriesToShow
-                    .OrderBy(p => p.TasterId == null)
+                    .OrderByDescending(p => p.TasterId == null)
                     .ThenByDescending(p => p.Id),
                 _ => pastriesToShow
                     .OrderByDescending(p => p.Id)
@@ -56,15 +66,7 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
             var pastries = await pastriesToShow
                 .Skip((currentPage - 1) * pastryPerPage)
                 .Take(pastryPerPage)
-                .Select(pastry => new PastryServiceModel()
-                {
-                    Id = pastry.Id,
-                    Description = pastry.Description,
-                    ImageUrl = pastry.ImageUrl,
-                    IsTasted = pastry.TasterId != null,
-                    Price = pastry.Price,
-                    Title = pastry.Title
-                })
+                .ProjectToPastryServiceModel()
                 .ToListAsync();
 
             int totalPastries = await pastriesToShow.CountAsync();
