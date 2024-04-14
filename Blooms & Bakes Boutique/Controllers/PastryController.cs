@@ -62,7 +62,14 @@ namespace Blooms___Bakes_Boutique.Controllers
 		[HttpGet]
         public async Task<IActionResult> PastryDetails(int id)
         {
-            return View(new PastryDetailsViewModel());
+			if (await pastryService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			var model = await pastryService.PastryDetailsByIdAsync(id);
+
+			return View(model);
         }
 
 		[HttpGet]
