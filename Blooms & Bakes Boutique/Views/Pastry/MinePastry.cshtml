@@ -1,8 +1,19 @@
-﻿@model AllPastriesQueryModel
+﻿@model IEnumerable<PastryServiceModel>
 
 @{
 	ViewBag.Title = "My Pastries";
 }
 
-<h2 class="text-center"><a style="color: #f075a0">My</a> Pastries</h2>
-<hr />
+<h2 class="text-center" style="padding-top: 2em; padding-bottom: 1.5em"><a style="color: #f075a0">My</a> Pastries</h2>
+
+@if(Model.Any() == false)
+{
+	<h3 class="text-center">You have no pastries yet!</h3>
+}
+
+<div class="row">
+	@foreach(var item in Model)
+	{
+		<partial name="_PastryPartial" model="@item" />
+	}
+</div>
