@@ -29,9 +29,20 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 		[AllowAnonymous]
 		[HttpGet]
-		public async Task<IActionResult> AllFlower()
+		public async Task<IActionResult> AllFlower([FromQuery]AllFlowersQueryModel model)
 		{
-			return View(new AllFlowersQueryModel());
+			var flowers = await flowerService.AllFlowerAsync(
+				model.FlowerCategory,
+				model.SearchTerm,
+				model.Sorting,
+				model.CurrentPage,
+				model.FlowersPerPage);
+
+			model.TotalFlowersCount = flowers.TotalFlowersCount;
+			model.Flowers = flowers.Flowers;
+			model.FlowerCategories = await flowerService.AllFlowerCategoriesNamesAsync();
+
+			return View(model);
 		}
 
 		[HttpGet]
