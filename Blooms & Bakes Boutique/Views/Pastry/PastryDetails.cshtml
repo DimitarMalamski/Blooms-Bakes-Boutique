@@ -1,8 +1,53 @@
-﻿@model PastryDetailsViewModel
+﻿@model PastryDetailsServiceModel
 
 @{
 	ViewBag.Title = "Pastry Details";
 }
 
-<h2 class="text-center">Pastry <a style="color: #f075a0">Details</a></h2>
-<hr />
+<h2 class="text-center" style="padding-top: 1.5em; padding-bottom: 1em">Pastry <a style="color: #f075a0">Details</a></h2>
+
+<div class="container" style="display:inline">
+	<div class="row">
+		<div class="col-4"> 
+			<img class="card-img-top" style="width: 20rem; border: 3px solid #f075a0" src="@Model.ImageUrl" alt="Pastry Image">
+		</div>
+		<div class="card col-8 border-0">
+			<p style="font-size:25px; font-weight: bold">@Model.Title</p> 
+			<p>Description: <b>@Model.Description</b></p>
+			<p> Price Of Pastry:
+				<b>@String.Format("{0:f2}", Model.Price) BGN</b> 
+			</p>
+			<p>Recipe:</p>
+			<p>@Model.Recipe</p>
+			<p>Category: <b>@Model.PastryCategory</b></p> 
+			<p><i>(@(Model.IsTasted ? "Tasted" : "Not Tasted"))</i></p>
+			<div class="form-inline">
+			@if (this.User.Identity.IsAuthenticated)
+			{
+					<a class="btn btn-warning" style="background-color: #e34d82; border: 2px solid #e04179; color: white" asp-controller="Pastry" asp-action="EditPastry" asp-route-id="@Model.Id">Edit</a>
+					<a class="ml-2 btn btn-danger" style="background-color: #eb286d; border: 2px solid #e61962; color: white" asp-controller="Pastry" asp-action="DeletePastry" asp-route-id="@Model.Id">Delete</a>
+					@if (!Model.IsTasted)
+				{
+						<form class="ml-2" asp-controller="Pastry" asp-action="Taste" asp-route-id="@Model.Id" method="post">
+							<input class="btn btn-primary" style="background-color: #d9a5b8; border: 2px solid #d694ac; color: white; margin-top: 0.5em" type="submit" value="Taste" />
+					</form>
+				}
+				else
+				{
+						<form class="ml-2" asp-controller="Pastry" asp-action="Untaste" asp-route-id="@Model.Id" method="post">
+							<input class="btn btn-primary" style="background-color: #912049; border: 2px solid #80183e; color: white;  margin-top: 0.5em" type="submit" value="Untaste" />
+						</form>
+				} 
+			}
+		</div>
+		<p></p> 
+		<div class="card" style="width: 18rem;">
+			<div class="card-body"> 
+				<h5 class="card-title">Patissier Info</h5>
+					<p class="card-text">Username: <a style="color: #f075a0">@Model.Patissier.UserName</a></p>
+					<p class="card-text">MasterChef Title: <a style="color: #f075a0">@Model.Patissier.MasterChefTitle</a></p>
+			</div> 
+		</div>
+	</div>
+</div>
+</div>
