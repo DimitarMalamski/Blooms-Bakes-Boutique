@@ -8,6 +8,12 @@ namespace Blooms___Bakes_Boutique.Core.Models.Flower
 {
 	public class FlowerDetailsViewModel
 	{
+		public int Id { get; set; }
 
+		public string Title { get; set; } = string.Empty;
+
+		public string Colour { get; set; } = string.Empty;
+
+		public string ImageUrl { get; set; } = string.Empty;
 	}
 }
