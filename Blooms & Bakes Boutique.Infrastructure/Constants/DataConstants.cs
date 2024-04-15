@@ -51,7 +51,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Constants
         // Flowers data constants class
         public class Flowers
         {
-            // Flowers data constants class
+            // Flower data constants class
             public class Flower
             {
                 // Flower title length requirements 
@@ -87,5 +87,17 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Constants
                 public const int FlowerMasterMaxLength = 30;
             }
         }
-    }
+
+		// User data constants class
+        public class User
+        {
+			// User First name 
+			public const int UserFirstNameMaxLength = 12;
+			public const int UserFirstNameMinLength = 1;
+
+            // User Last name
+			public const int UserLastNameMaxLength = 15;
+			public const int UserLastNameMinLength = 3;
+		}
+	}
 }
