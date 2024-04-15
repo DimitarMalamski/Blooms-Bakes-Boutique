@@ -54,6 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     options.Password.RequireNonAlphanumeric = false;
 
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BloomsAndBakesDbContext>();
 
             return services;

@@ -59,4 +59,6 @@ app.UseEndpoints(endpoints =>
 	endpoints.MapRazorPages();
 });
 
+app.SeedAdmin();
+
 await app.RunAsync();
