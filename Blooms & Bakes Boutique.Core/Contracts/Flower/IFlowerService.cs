@@ -41,5 +41,13 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Flower
 		Task<FlowerFormModel?> GetFlowerFormModelByIdAsync(int id);
 
 		Task DeleteAsync(int flowerId);
+
+		Task<bool> IsGatheredAsync(int flowerId);
+
+		Task<bool> IsGatheredByUserWithIdAsync(int flowerId, string userId);
+
+		Task GatherAsync(int id, string userId);
+
+		Task UngatherAsync(int flowerId, string userId);
 	}
 }
