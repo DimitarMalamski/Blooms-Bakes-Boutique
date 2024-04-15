@@ -1,6 +1,7 @@
 using Blooms___Bakes_Boutique.Infrastructure.Data;
 using Blooms___Bakes_Boutique.ModelBinders;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddApplicationIdentity(builder.Configuration);
 builder.Services.AddControllersWithViews(options =>
 {
     options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
 
 //Adding application Services
@@ -40,7 +42,21 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapDefaultControllerRoute();
-app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "Pastry Details",
+        pattern: "/Pastry/Details/{id}/{information}",
+        defaults: new { Controller = "Pastry", Action = "PastryDetails" }
+    );
+
+	endpoints.MapControllerRoute(
+		name: "Flower Details",
+		pattern: "/Flower/Details/{id}/{information}",
+		defaults: new { Controller = "Flower", Action = "FlowerDetails" }
+	);
+	endpoints.MapDefaultControllerRoute();
+	endpoints.MapRazorPages();
+});
 
 await app.RunAsync();

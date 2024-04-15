@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
+using System.ComponentModel.DataAnnotations;
 using static Blooms___Bakes_Boutique.Core.Constants.MessageConstants;
 using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Pastries.Pastry;
 
 namespace Blooms___Bakes_Boutique.Core.Models.Pastry
 {
-	public class PastryFormModel
+	public class PastryFormModel : IPastryModel
 	{
 		[Required(ErrorMessage = RequiredMessage)]
 		[StringLength(TitleMaxLength,

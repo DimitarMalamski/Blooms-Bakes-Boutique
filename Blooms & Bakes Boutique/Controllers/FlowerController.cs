@@ -4,12 +4,14 @@ using Blooms___Bakes_Boutique.Core.Contracts.Flower;
 using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
 using Blooms___Bakes_Boutique.Core.Contracts.Patissier;
 using Blooms___Bakes_Boutique.Core.Exceptions;
+using Blooms___Bakes_Boutique.Core.Extensions;
 using Blooms___Bakes_Boutique.Core.Models.Flower;
 using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using Blooms___Bakes_Boutique.Core.Services.Pastry;
 using Blooms___Bakes_Boutique.Core.Services.Patissier;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System.Security.Claims;
 using static Blooms___Bakes_Boutique.Core.Constants.MessageConstants;
 
@@ -69,7 +71,7 @@ namespace Blooms___Bakes_Boutique.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> FlowerDetails(int id)
+		public async Task<IActionResult> FlowerDetails(int id, string information)
 		{
 			if (await flowerService.ExistsAsync(id) == false)
 			{
@@ -77,6 +79,12 @@ namespace Blooms___Bakes_Boutique.Controllers
 			}
 
 			var model = await flowerService.FlowerDetailsByIdAsync(id);
+
+
+			if (information != model.GetInformation())
+			{
+				return BadRequest();
+			}
 
 			return View(model);
 		}
@@ -113,7 +121,7 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			int newFlowerId = await flowerService.CreateAsync(model, floristId ?? 0);
 
-			return RedirectToAction(nameof(FlowerDetails), new { id = newFlowerId });
+			return RedirectToAction(nameof(FlowerDetails), new { id = newFlowerId, information = model.GetInformation() });
 		}
 
 		[HttpGet]
@@ -161,7 +169,7 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			await flowerService.EditAsync(id, model);
 
-			return RedirectToAction(nameof(FlowerDetails), new { id = id });
+			return RedirectToAction(nameof(FlowerDetails), new { id = id, information = model.GetInformation() });
 		}
 
 		[HttpGet]

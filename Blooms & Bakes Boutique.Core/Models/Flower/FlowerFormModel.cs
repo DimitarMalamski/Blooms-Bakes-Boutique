@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Blooms___Bakes_Boutique.Core.Contracts.Flower;
+using System.ComponentModel.DataAnnotations;
 using static Blooms___Bakes_Boutique.Core.Constants.MessageConstants;
 using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Flowers.Flower;
 
 namespace Blooms___Bakes_Boutique.Core.Models.Flower
 {
-	public class FlowerFormModel
+	public class FlowerFormModel : IFlowerModel
 	{
 		[Required(ErrorMessage = RequiredMessage)]
 		[StringLength(TitleMaxLength,

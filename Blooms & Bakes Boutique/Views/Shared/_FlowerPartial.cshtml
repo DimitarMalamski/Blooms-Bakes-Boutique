@@ -12,7 +12,7 @@
 			</h6>
 			<h6>(@(Model.IsGathered ? "Gathered" : "Not Gathered"))</h6>
 			<br />
-			<a asp-controller="Flower" asp-action="FlowerDetails" asp-route-id="@Model.Id" class="btn btn-success" style="background-color: #de8eaa; border: 2px solid #db799b; color: white">Details</a>
+			<a asp-controller="Flower" asp-action="FlowerDetails" asp-route-id="@Model.Id" asp-route-information="@Model.GetInformation()" class="btn btn-success" style="background-color: #de8eaa; border: 2px solid #db799b; color: white">Details</a>
 			@if (this.User.Identity.IsAuthenticated)
 			{
 				<a asp-controller="Flower" asp-action="EditFlower" asp-route-id="@Model.Id" class="btn btn-warning" style="background-color: #e34d82; border: 2px solid #e04179; color: white">Edit</a>

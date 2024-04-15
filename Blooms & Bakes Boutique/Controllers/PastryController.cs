@@ -2,9 +2,11 @@
 using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
 using Blooms___Bakes_Boutique.Core.Contracts.Patissier;
 using Blooms___Bakes_Boutique.Core.Exceptions;
+using Blooms___Bakes_Boutique.Core.Extensions;
 using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System.Security.Claims;
 using static Blooms___Bakes_Boutique.Core.Constants.MessageConstants;
 
@@ -64,7 +66,7 @@ namespace Blooms___Bakes_Boutique.Controllers
         }
 
 		[HttpGet]
-        public async Task<IActionResult> PastryDetails(int id)
+        public async Task<IActionResult> PastryDetails(int id, string information)
         {
 			if (await pastryService.ExistsAsync(id) == false)
 			{
@@ -72,6 +74,11 @@ namespace Blooms___Bakes_Boutique.Controllers
 			}
 
 			var model = await pastryService.PastryDetailsByIdAsync(id);
+
+			if (information != model.GetInformation())
+			{
+				return BadRequest();
+			}
 
 			return View(model);
         }
@@ -108,7 +115,7 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			int newPastryId = await pastryService.CreateAsync(model, patissierId ?? 0);
 
-            return RedirectToAction(nameof(PastryDetails), new { id = newPastryId });
+            return RedirectToAction(nameof(PastryDetails), new { id = newPastryId, information = model.GetInformation() });
 		}
 
 		[HttpGet]
@@ -156,7 +163,7 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			await pastryService.EditAsync(id, model);
 
-			return RedirectToAction(nameof(PastryDetails), new { id = id });
+			return RedirectToAction(nameof(PastryDetails), new { id = id, Information = model.GetInformation() });
 		}
 
 		[HttpGet]

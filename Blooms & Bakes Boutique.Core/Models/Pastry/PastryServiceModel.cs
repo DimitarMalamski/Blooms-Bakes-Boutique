@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,7 +10,7 @@ using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Past
 
 namespace Blooms___Bakes_Boutique.Core.Models.Pastry
 {
-	public class PastryServiceModel
+	public class PastryServiceModel : IPastryModel
 	{
 		public int Id { get; set; }
 

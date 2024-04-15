@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blooms___Bakes_Boutique.Core.Contracts.Flower;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,7 +10,7 @@ using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Flow
 
 namespace Blooms___Bakes_Boutique.Core.Models.Flower
 {
-	public class FlowerServiceModel
+	public class FlowerServiceModel : IFlowerModel
 	{
 		public int Id { get; set; }
 
