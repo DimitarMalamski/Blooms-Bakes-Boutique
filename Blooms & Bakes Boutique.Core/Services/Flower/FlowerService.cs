@@ -1,4 +1,5 @@
 ﻿using Blooms___Bakes_Boutique.Core.Contracts.Flower;
+using Blooms___Bakes_Boutique.Core.Exceptions;
 using Blooms___Bakes_Boutique.Core.Models.Flower;
 using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using Blooms___Bakes_Boutique.Enumerations;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Blooms___Bakes_Boutique.Core.Constants.MessageConstants;
 
 namespace Blooms___Bakes_Boutique.Core.Services.Flower
 {
@@ -129,6 +131,12 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
 			return flower.Id;
 		}
 
+		public async Task DeleteAsync(int flowerId)
+		{
+			await repository.DeleteAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>(flowerId);
+			await repository.SaveChangesAsync();
+		}
+
 		public async Task EditAsync(int flowerId, FlowerFormModel model)
 		{
 			var flower = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>(flowerId);
@@ -181,6 +189,17 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
 				.FirstAsync();
 		}
 
+		public async Task GatherAsync(int id, string userId)
+		{
+			var flower = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>(id);
+
+			if (flower != null)
+			{
+				flower.GathererId = userId;
+				await repository.SaveChangesAsync();
+			}
+		}
+
 		public async Task<FlowerFormModel?> GetFlowerFormModelByIdAsync(int id)
 		{
 			var flower = await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
@@ -208,6 +227,50 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
 		{
 			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
 				.AnyAsync(f => f.Id == flowerId && f.Florist.UserId == userId);
+		}
+
+		public async Task<bool> IsGatheredAsync(int flowerId)
+		{
+			bool result = false;
+
+			var flower = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>(flowerId);
+
+			if (flower != null)
+			{
+				result = flower.GathererId != null;
+			}
+
+			return result;
+		}
+
+		public async Task<bool> IsGatheredByUserWithIdAsync(int flowerId, string userId)
+		{
+			bool result = false;
+
+			var flower = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>(flowerId);
+
+			if (flower != null)
+			{
+				result = flower.GathererId == userId;
+			}
+
+			return result;
+		}
+
+		public async Task UngatherAsync(int flowerId, string userId)
+		{
+			var flower = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>(flowerId);
+
+			if (flower != null)
+			{
+				if (flower.GathererId != userId)
+				{
+					throw new UnauthorizedActionException(UnauthorizedActionExceptionGatherer);
+				}
+
+				flower.GathererId = null;
+				await repository.SaveChangesAsync();
+			}
 		}
 	}
 }
