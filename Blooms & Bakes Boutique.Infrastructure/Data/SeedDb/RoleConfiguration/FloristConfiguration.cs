@@ -10,7 +10,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb.RoleConfiguration
         {
             var data = new SeedData();
 
-            builder.HasData(new Florist[] { data.Florist });
+            builder.HasData(new Florist[] { data.Florist, data.AdminFlorist });
         }
     }
 }

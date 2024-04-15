@@ -11,7 +11,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb.UserConfiguration
         {
             var data = new SeedData();
 
-            builder.HasData(new ApplicationUser[] { data.PatissierUser, data.FloristUser, data.GuestUser});
+            builder.HasData(new ApplicationUser[] { data.PatissierUser, data.FloristUser, data.GuestUser, data.AdminUser});
         }
     }
 }
