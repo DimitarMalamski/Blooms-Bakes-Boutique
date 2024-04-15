@@ -41,5 +41,12 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.Pastry
 
         Task DeleteAsync(int pastryId);
 
+        Task<bool> IsTastedAsync(int pastryId);
+
+        Task<bool> IsTastedByUserWithIdAsync(int pastryId, string userId);
+
+        Task TasteAsync(int id, string userId);
+
+        Task UntasteAsync(int pastryId, string userId);
 	}
 }
