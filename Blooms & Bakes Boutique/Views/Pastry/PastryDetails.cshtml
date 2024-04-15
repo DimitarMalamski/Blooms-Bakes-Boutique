@@ -27,13 +27,15 @@
 			<div class="form-inline">
 				@if (this.User.Identity.IsAuthenticated)
 				{
-					if (await pastryService.HasPatissierWithIdAsync(Model.Id, User.Id()))
+					if (await pastryService.HasPatissierWithIdAsync(Model.Id, User.Id())
+					|| User.IsAdmin())
 					{
 						<a class="btn btn-warning" style="background-color: #e34d82; border: 2px solid #e04179; color: white" asp-controller="Pastry" asp-action="EditPastry" asp-route-id="@Model.Id">Edit</a>
 						<a class="ml-2 btn btn-danger" style="background-color: #eb286d; border: 2px solid #e61962; color: white" asp-controller="Pastry" asp-action="DeletePastry" asp-route-id="@Model.Id">Delete</a>
 					}
 
-					@if (!Model.IsTasted && (await patissierService.ExistByIdAsync(User.Id())) == false)
+					@if (!Model.IsTasted && ((await patissierService.ExistByIdAsync(User.Id())) == false
+					|| User.IsAdmin()))
 					{
 						<form class="ml-2" asp-controller="Pastry" asp-action="Taste" asp-route-id="@Model.Id" method="post">
 							<input class="btn btn-primary" style="background-color: #d9a5b8; border: 2px solid #d694ac; color: white; margin-top: 0.5em" type="submit" value="Taste" />

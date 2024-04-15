@@ -27,12 +27,14 @@
 			<div class="form-inline">
 				@if (this.User.Identity.IsAuthenticated)
 				{
-					if (await flowerService.HasFloristWithIdAsync(Model.Id, User.Id()))
+					if (await flowerService.HasFloristWithIdAsync(Model.Id, User.Id())
+					|| User.IsAdmin())
 					{
 						<a class="btn btn-warning" style="background-color: #e34d82; border: 2px solid #e04179; color: white" asp-controller="Flower" asp-action="EditFlower" asp-route-id="@Model.Id">Edit</a>
 						<a class="ml-2 btn btn-danger" style="background-color: #eb286d; border: 2px solid #e61962; color: white" asp-controller="Flower" asp-action="DeleteFlower" asp-route-id="@Model.Id">Delete</a>
 					}
-					@if (!Model.IsGathered && (await floristService.ExistByIdAsync(User.Id())) == false)
+					@if (!Model.IsGathered && ((await floristService.ExistByIdAsync(User.Id())) == false
+										|| User.IsAdmin()))
 					{
 						<form class="ml-2" asp-controller="Flower" asp-action="Gather" asp-route-id="@Model.Id" method="post">
 							<input class="btn btn-primary" style="background-color: #d9a5b8; border: 2px solid #d694ac; color: white; margin-top: 0.5em" type="submit" value="Gather" />

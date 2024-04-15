@@ -132,7 +132,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 				return BadRequest();
 			}
 
-			if (await flowerService.HasFloristWithIdAsync(id, User.Id()) == false)
+			if (await flowerService.HasFloristWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -150,7 +151,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 				return BadRequest();
 			}
 
-			if (await flowerService.HasFloristWithIdAsync(id, User.Id()) == false)
+			if (await flowerService.HasFloristWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -180,7 +182,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 				return BadRequest();
 			}
 
-			if (await flowerService.HasFloristWithIdAsync(id, User.Id()) == false)
+			if (await flowerService.HasFloristWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -206,7 +209,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 				return BadRequest();
 			}
 
-			if (await flowerService.HasFloristWithIdAsync(model.Id, User.Id()) == false)
+			if (await flowerService.HasFloristWithIdAsync(model.Id, User.Id()) == false
+				&& User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -224,7 +228,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 				return BadRequest();
 			}
 
-			if (await floristService.ExistByIdAsync(User.Id()))
+			if (await floristService.ExistByIdAsync(User.Id())
+				&& User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}

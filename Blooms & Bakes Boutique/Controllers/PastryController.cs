@@ -126,7 +126,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 				return BadRequest();
 			}
 
-			if (await pastryService.HasPatissierWithIdAsync(id, User.Id()) == false)
+			if (await pastryService.HasPatissierWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -144,7 +145,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 				return BadRequest();
 			}
 
-			if (await pastryService.HasPatissierWithIdAsync(id, User.Id()) == false)
+			if (await pastryService.HasPatissierWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -174,7 +176,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 				return BadRequest();
 			}
 
-			if (await pastryService.HasPatissierWithIdAsync(id, User.Id()) == false)
+			if (await pastryService.HasPatissierWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -200,7 +203,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 				return BadRequest();
 			}
 
-			if (await pastryService.HasPatissierWithIdAsync(model.Id, User.Id()) == false)
+			if (await pastryService.HasPatissierWithIdAsync(model.Id, User.Id()) == false
+				&& User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -218,7 +222,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 				return BadRequest();
 			}
 
-			if (await patissierService.ExistByIdAsync(User.Id()))
+			if (await patissierService.ExistByIdAsync(User.Id())
+				&& User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
