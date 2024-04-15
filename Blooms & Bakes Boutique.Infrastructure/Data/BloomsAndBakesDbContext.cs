@@ -27,8 +27,9 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data
             builder.ApplyConfiguration(new FloristConfiguration());           
             builder.ApplyConfiguration(new FlowerCategoryConfiguration());           
             builder.ApplyConfiguration(new FlowerConfiguration());
+			builder.ApplyConfiguration(new UserClaimsConfiguration());
 
-            base.OnModelCreating(builder);
+			base.OnModelCreating(builder);
         }
 
         // Pastries DbSets
