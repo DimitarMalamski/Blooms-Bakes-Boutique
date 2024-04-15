@@ -4,7 +4,7 @@
     ViewData["Title"] = "Register";
 }
 
-<h1 class="text-center" style="margin-top: 5em">@ViewData["Title"]</h1>
+<h1 class="text-center" style="margin-top: 3em">@ViewData["Title"]</h1>
 
 <div class="row" style="justify-content: center">
     <div class="col-md-4">
@@ -26,6 +26,16 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.ConfirmPassword"></label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-floating" style="margin-top: 1em">
+                <input asp-for="Input.FirstName" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.FirstName"></label>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-floating" style="margin-top: 1em">
+                <input asp-for="Input.LastName" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.LastName"></label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary" style="background-color: lightpink; border: 2px solid #f075a0; margin-top: 1em">Register</button>
         </form>
