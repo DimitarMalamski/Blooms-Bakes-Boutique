@@ -15,7 +15,7 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Constants
             public class Pastry
             {
                 // Pastry title length requirements 
-                public const int TitleMinLength = 5;
+                public const int TitleMinLength = 3;
                 public const int TitleMaxLength = 100;
 
                 // Pastry description length requirements
@@ -55,12 +55,12 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Constants
             public class Flower
             {
                 // Flower title length requirements 
-                public const int TitleMinLength = 10;
+                public const int TitleMinLength = 3;
                 public const int TitleMaxLength = 60;
 
                 // Flower description length requirements
                 public const int DescriptionMinLength = 20;
-                public const int DescriptionMaxLength = 500;
+                public const int DescriptionMaxLength = 1000;
 
                 // Flower recipe length requirements
                 public const int ColourMinLength = 3;

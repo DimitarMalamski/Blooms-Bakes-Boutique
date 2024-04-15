@@ -1,23 +1,31 @@
-﻿<ul class="navbar-nav flex-grow-1">
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Pastry" asp-action="AllPastry">All Pastries</a>
-    </li> 
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Flower" asp-action="AllFlower">All Flowers</a>
-    </li>
-    @if (this.User?.Identity?.IsAuthenticated ?? false)
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Pastry" asp-action="MinePastry">My Pastries</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Flower" asp-action="MineFlower">My Flowers</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Pastry" asp-action="AddPastry">Add Pastry</a>
-        </li>      
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Flower" asp-action="AddFlower">Add Flower</a>
-        </li>
-    }
+﻿@inject IPatissierService patissierService
+@inject IFloristService floristService
+<ul class="navbar-nav flex-grow-1">
+	<li class="nav-item">
+		<a class="nav-link text-dark" asp-area="" asp-controller="Pastry" asp-action="AllPastry">All Pastries</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link text-dark" asp-area="" asp-controller="Flower" asp-action="AllFlower">All Flowers</a>
+	</li>
+	@if (this.User?.Identity?.IsAuthenticated ?? false)
+	{
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="" asp-controller="Pastry" asp-action="MinePastry">My Pastries</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="" asp-controller="Flower" asp-action="MineFlower">My Flowers</a>
+		</li>
+		@if (await patissierService.ExistByIdAsync(User.Id()))
+		{
+			<li class="nav-item">
+				<a class="nav-link text-dark" asp-area="" asp-controller="Pastry" asp-action="AddPastry">Add Pastry</a>
+			</li>
+		}
+		@if (await floristService.ExistByIdAsync(User.Id()))
+		{
+			<li class="nav-item">
+				<a class="nav-link text-dark" asp-area="" asp-controller="Flower" asp-action="AddFlower">Add Flower</a>
+			</li>
+		}
+	}
 </ul>
