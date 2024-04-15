@@ -1,6 +1,7 @@
 ﻿using Blooms___Bakes_Boutique.Attributes;
 using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
 using Blooms___Bakes_Boutique.Core.Contracts.Patissier;
+using Blooms___Bakes_Boutique.Core.Exceptions;
 using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +14,16 @@ namespace Blooms___Bakes_Boutique.Controllers
     {
 		private readonly IPastryService pastryService;
 		private readonly IPatissierService patissierService;
+		private readonly ILogger logger;
 
         public PastryController(
 			IPastryService _pastryService,
-			IPatissierService _patissierService)
+			IPatissierService _patissierService,
+			ILogger<PastryController> _logger)
         {
 			pastryService = _pastryService;
 			patissierService = _patissierService;
+			logger = _logger;
         }
 
         [AllowAnonymous]
@@ -157,26 +161,91 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 		[HttpGet]
 		public async Task<IActionResult> DeletePastry(int id)
-		{
-			return View(new PastryFormModel());
+		{		
+			if (await pastryService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await pastryService.HasPatissierWithIdAsync(id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+			var pastry = await pastryService.PastryDetailsByIdAsync(id);
+
+			var model = new PastryDetailsViewModel()
+			{
+				Id = id,
+				Description = pastry.Description,
+				ImageUrl = pastry.ImageUrl,
+				Title = pastry.Title
+			};
+
+			return View(model);
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> DeletePastry(PastryDetailsViewModel model)
 		{
+			if (await pastryService.ExistsAsync(model.Id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await pastryService.HasPatissierWithIdAsync(model.Id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+			await pastryService.DeleteAsync(model.Id);
+
 			return RedirectToAction(nameof(AllPastry));
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> Taste(int id)
 		{
-			return RedirectToAction(nameof(MinePastry));
+			if (await pastryService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await patissierService.ExistByIdAsync(User.Id()))
+			{
+				return Unauthorized();
+			}
+
+			if (await pastryService.IsTastedAsync(id)) 
+			{
+				return BadRequest();
+			}
+
+			await pastryService.TasteAsync(id, User.Id());
+
+			return RedirectToAction(nameof(AllPastry));
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> Untaste(int id)
 		{
-			return RedirectToAction(nameof(MinePastry));
+			if (await pastryService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			try
+			{
+				await pastryService.UntasteAsync(id, User.Id());
+			}
+			catch (UnauthorizedActionException uae)
+			{
+				logger.LogError(uae, "PastryController/Untaste");
+
+				return Unauthorized();
+			}	
+			
+			return RedirectToAction(nameof(AllPastry));
 		}
 	}
 }
