@@ -21,5 +21,9 @@
 		public const string FlowerCategoryDoesNotExist = "Flower Category does not exist!";
 
 		public const string PastryCategoryDoesNotExist = "Pastry Category does not exist!";
+
+		public const string UnauthorizedActionExceptionTaster = "The user is mot the taster of the pastry!";
+
+		public const string UnauthorizedActionExceptionGatherer = "The user is mot the gatherer of the flower!";
 	}
 }
