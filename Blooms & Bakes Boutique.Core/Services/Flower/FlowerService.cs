@@ -176,7 +176,8 @@ namespace Blooms___Bakes_Boutique.Core.Services.Flower
 					Colour = f.Colour,
 					Florist = new Models.Florist.FloristServiceModel()
 					{
-						UserName = f.Florist.User.UserName,
+						FullName = $"{f.Florist.User.FirstName} {f.Florist.User.LastName}",
+						Email = f.Florist.User.UserName,
 						FlowerMasterTitle = f.Florist.FlowerMasterTitle
 					},
 					FlowerCategory = f.FlowerCategory.Name,

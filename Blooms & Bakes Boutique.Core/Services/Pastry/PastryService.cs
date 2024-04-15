@@ -230,7 +230,8 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
                     Description = p.Description,
                     Patissier = new Models.Patissier.PatissierServiceModel()
                     {
-                        UserName = p.Patissier.User.UserName,
+                        FullName = $"{p.Patissier.User.FirstName} {p.Patissier.User.LastName}",
+                        Email = p.Patissier.User.UserName,
                         MasterChefTitle = p.Patissier.MasterChefTitle
                     },
                     PastryCategory = p.PastryCategory.Name,

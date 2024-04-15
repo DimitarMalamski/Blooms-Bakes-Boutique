@@ -51,7 +51,11 @@
 			<div class="card" style="width: 20rem;">
 				<div class="card-body">
 					<h5 class="card-title">Patissier Info</h5>
-					<p class="card-text">Email: <a style="color: #f075a0">@Model.Patissier.UserName</a></p>
+					@if (Model.Patissier.FullName != null)
+					{
+						<p class="card-text">Full Name: <a style="color: #f075a0">@Model.Patissier.FullName</a></p>
+					}
+					<p class="card-text">Email: <a style="color: #f075a0">@Model.Patissier.Email</a></p>
 					<p class="card-text">MasterChef Title: <a style="color: #f075a0">@Model.Patissier.MasterChefTitle</a></p>
 				</div>
 			</div>

@@ -50,7 +50,11 @@
 			<div class="card" style="width: 20rem;">
 				<div class="card-body">
 					<h5 class="card-title">Florist Info</h5>
-					<p class="card-text">Email: <a style="color: #f075a0">@Model.Florist.UserName</a></p>
+					@if (Model.Florist.FullName != null)
+					{
+						<p class="card-text">Full Name: <a style="color: #f075a0">@Model.Florist.FullName</a></p>
+					}
+					<p class="card-text">Email: <a style="color: #f075a0">@Model.Florist.Email</a></p>
 					<p class="card-text">FlowerMaster Title: <a style="color: #f075a0">@Model.Florist.FlowerMasterTitle</a></p>
 				</div>
 			</div>
