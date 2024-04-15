@@ -1,6 +1,27 @@
-﻿@{
+﻿@model FlowerDetailsViewModel
+@{
 	ViewBag.Title = "Delete Flower";
 }
 
-<h2 class="text-center"><a style="color: #f075a0">Delete</a> Flower</h2>
-<hr />
+<h2 class="text-center" style="padding-top: 5em; padding-bottom: 1em"><a style="color: #f075a0">Delete</a> Flower</h2>
+
+<form asp-action="DeleteFlower"> 
+	<div class="row"> 
+		<div class="col-md-4"> 
+			<img class="card-img-top" src="@Model.ImageUrl" alt="Flower Image" style="border: 3px solid #f075a0">
+		</div>
+		<div class="col-md-8">
+				<div class="form-group"> 
+					<label asp-for="Title" class="control-label"></label> 
+					<input asp-for="Title" class="form-control" disabled="disabled" /> 
+				</div> 
+				<div class="form-group" style="padding-top: 1em">
+					<label asp-for="Colour" class="control-label"></label>
+				<input asp-for="Colour" class="form-control" disabled="disabled" />
+			</div> 
+				<div class="form-group text-center" style="padding-top: 4em">
+				<input type="submit" value="Delete" class="btn btn-primary" style="background-color: lightpink; border: 2px solid #f075a0" />
+			</div> 
+			</div> 
+		</div> 
+</form>
