@@ -8,6 +8,7 @@ using Blooms___Bakes_Boutique.Core.Services.Pastry;
 using Blooms___Bakes_Boutique.Core.Services.Patissier;
 using Blooms___Bakes_Boutique.Infrastructure.Data;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Common;
+using Blooms___Bakes_Boutique.Infrastructure.Data.Models.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
@@ -42,9 +43,10 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
             services
-                .AddDefaultIdentity<IdentityUser>(options =>
+                .AddDefaultIdentity<ApplicationUser>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequireDigit = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
 
