@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Flowers.Florsit;
+using Blooms___Bakes_Boutique.Infrastructure.Data.Models.User;
 
 namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers
 {
@@ -30,6 +31,6 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers
 
         [ForeignKey(nameof(UserId))]
         [Comment("User")]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
     }
 }

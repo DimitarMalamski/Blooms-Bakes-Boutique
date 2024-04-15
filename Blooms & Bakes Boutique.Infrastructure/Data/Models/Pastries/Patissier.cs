@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Blooms___Bakes_Boutique.Infrastructure.Data.Models.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,6 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries
 
         [ForeignKey(nameof(UserId))]
         [Comment("User")]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
     }
 }
