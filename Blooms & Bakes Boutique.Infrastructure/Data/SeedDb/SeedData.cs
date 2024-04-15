@@ -1,5 +1,6 @@
 ﻿using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries;
+using Blooms___Bakes_Boutique.Infrastructure.Data.Models.User;
 using Microsoft.AspNetCore.Identity;
 
 namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
@@ -7,9 +8,9 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
     internal class SeedData
     {
         // User roles
-        public IdentityUser FloristUser { get; set; } = null!;
-        public IdentityUser PatissierUser { get; set; } = null!;
-        public IdentityUser GuestUser { get; set; } = null!;
+        public ApplicationUser FloristUser { get; set; } = null!;
+        public ApplicationUser PatissierUser { get; set; } = null!;
+        public ApplicationUser GuestUser { get; set; } = null!;
 
         // Tyles of roles
         public Patissier Patissier { get; set; } = null!;
@@ -52,38 +53,44 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.SeedDb
         // Private individual seeding methods
         private void SeedUsers()
         {
-            var hasher = new PasswordHasher<IdentityUser>();
+            var hasher = new PasswordHasher<ApplicationUser>();
 
-            PatissierUser = new IdentityUser()
+            PatissierUser = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d8395082",
                 UserName = "patissier@mail.com",
                 NormalizedUserName = "patissier@mail.com",
                 Email = "patissier@mail.com",
-                NormalizedEmail = "patissier@mail.com"
+                NormalizedEmail = "patissier@mail.com",
+                FirstName = "Dimitar",
+                LastName = "Malamski"
             };
 
             PatissierUser.PasswordHash = hasher.HashPassword(PatissierUser, "patissier123");
 
-            FloristUser = new IdentityUser()
+            FloristUser = new ApplicationUser()
             {
                 Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                 UserName = "florist@mail.com",
                 NormalizedUserName = "florist@mail.com",
                 Email = "florist@mail.com",
-                NormalizedEmail = "florist@mail.com"
-            };
+                NormalizedEmail = "florist@mail.com",
+				FirstName = "Ivana",
+				LastName = "Koroleeva"
+			};
 
             FloristUser.PasswordHash = hasher.HashPassword(FloristUser, "florist123");
 
-            GuestUser = new IdentityUser()
+            GuestUser = new ApplicationUser()
             {
                 Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 UserName = "guest@mail.com",
                 NormalizedUserName = "guest@mail.com",
                 Email = "guest@mail.com",
-                NormalizedEmail = "guest@mail.com"
-            };
+                NormalizedEmail = "guest@mail.com",
+				FirstName = "Iana",
+				LastName = "Malamska"
+			};
 
             GuestUser.PasswordHash = hasher.HashPassword(PatissierUser, "guest123");
         }
