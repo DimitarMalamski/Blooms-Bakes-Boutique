@@ -1,7 +1,9 @@
-﻿using Blooms___Bakes_Boutique.Core.Contracts.Florist;
+﻿using Blooms___Bakes_Boutique.Core.Contracts.ApplicationUser;
+using Blooms___Bakes_Boutique.Core.Contracts.Florist;
 using Blooms___Bakes_Boutique.Core.Contracts.Flower;
 using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
 using Blooms___Bakes_Boutique.Core.Contracts.Patissier;
+using Blooms___Bakes_Boutique.Core.Services.ApplicationUser;
 using Blooms___Bakes_Boutique.Core.Services.Florist;
 using Blooms___Bakes_Boutique.Core.Services.Flower;
 using Blooms___Bakes_Boutique.Core.Services.Pastry;
@@ -23,6 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IFlowerService, FlowerService>();
             services.AddScoped<IPatissierService, PatissierService>();
             services.AddScoped<IFloristService, FloristService>();
+            services.AddScoped<IApplicationUserService, ApplicationUserService>();
 
             return services;
         }
