@@ -3,6 +3,7 @@ using Blooms___Bakes_Boutique.Core.Contracts.Florist;
 using Blooms___Bakes_Boutique.Core.Contracts.Flower;
 using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
 using Blooms___Bakes_Boutique.Core.Contracts.Patissier;
+using Blooms___Bakes_Boutique.Core.Exceptions;
 using Blooms___Bakes_Boutique.Core.Models.Flower;
 using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using Blooms___Bakes_Boutique.Core.Services.Pastry;
@@ -18,13 +19,16 @@ namespace Blooms___Bakes_Boutique.Controllers
     {
 		private readonly IFlowerService flowerService;
 		private readonly IFloristService floristService;
+		private readonly ILogger logger;
 
 		public FlowerController(
 			IFlowerService _flowerService,
-			IFloristService _floristService)
+			IFloristService _floristService,
+			ILogger<FlowerController> _logger)
 		{
 			flowerService = _flowerService;
 			floristService = _floristService;
+			logger = _logger;
 		}
 
 		[AllowAnonymous]
@@ -163,25 +167,90 @@ namespace Blooms___Bakes_Boutique.Controllers
 		[HttpGet]
 		public async Task<IActionResult> DeleteFlower(int id)
 		{
-			return View(new FlowerFormModel());
+			if (await flowerService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await flowerService.HasFloristWithIdAsync(id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+			var pastry = await flowerService.FlowerDetailsByIdAsync(id);
+
+			var model = new FlowerDetailsViewModel()
+			{
+				Id = id,
+				Colour = pastry.Description,
+				ImageUrl = pastry.ImageUrl,
+				Title = pastry.Title
+			};
+
+			return View(model);
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> DeleteFlower(FlowerDetailsViewModel model)
 		{
+			if (await flowerService.ExistsAsync(model.Id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await flowerService.HasFloristWithIdAsync(model.Id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+			await flowerService.DeleteAsync(model.Id);
+
 			return RedirectToAction(nameof(AllFlower));
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> Gather(int id)
 		{
-			return RedirectToAction(nameof(MineFlower));
+			if (await flowerService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await floristService.ExistByIdAsync(User.Id()))
+			{
+				return Unauthorized();
+			}
+
+			if (await flowerService.IsGatheredAsync(id))
+			{
+				return BadRequest();
+			}
+
+			await flowerService.GatherAsync(id, User.Id());
+
+			return RedirectToAction(nameof(AllFlower));
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> Ungather(int id)
 		{
-			return RedirectToAction(nameof(MineFlower));
+			if (await flowerService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			try
+			{
+				await flowerService.UngatherAsync(id, User.Id());
+			}
+			catch (UnauthorizedActionException uae)
+			{
+				logger.LogError(uae, "FlowerController/Ungather");
+
+				return Unauthorized();
+			}
+
+			return RedirectToAction(nameof(AllFlower));
 		}
 	}
 }
