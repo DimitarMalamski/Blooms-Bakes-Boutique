@@ -1,4 +1,5 @@
 ﻿using Blooms___Bakes_Boutique.Core.Contracts.Pastry;
+using Blooms___Bakes_Boutique.Core.Exceptions;
 using Blooms___Bakes_Boutique.Core.Models.Pastry;
 using Blooms___Bakes_Boutique.Enumerations;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Common;
@@ -6,6 +7,7 @@ using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Pastries;
+using static Blooms___Bakes_Boutique.Core.Constants.MessageConstants;
 
 namespace Blooms___Bakes_Boutique.Core.Services.Pastry
 {
@@ -125,6 +127,12 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
             return pastry.Id;
 		}
 
+		public async Task DeleteAsync(int pastryId)
+		{
+            await repository.DeleteAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>(pastryId);
+            await repository.SaveChangesAsync();
+		}
+
 		public async Task EditAsync(int pastryId, PastryFormModel model)
 		{
             var pastry = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>(pastryId);
@@ -178,6 +186,34 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
                 .AnyAsync(p => p.Id == pastryId && p.Patissier.UserId == userId);
 		}
 
+		public async Task<bool> IsTastedAsync(int pastryId)
+		{
+            bool result = false;
+
+            var pastry = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>(pastryId);
+
+            if (pastry != null)
+            {
+                result = pastry.TasterId != null;
+            }
+
+            return result;
+		}
+
+		public async Task<bool> IsTastedByUserWithIdAsync(int pastryId, string userId)
+		{
+			bool result = false;
+
+			var pastry = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>(pastryId);
+
+			if (pastry != null)
+			{
+				result = pastry.TasterId == userId;
+			}
+
+			return result;
+		}
+
 		public async Task<bool> PastryCategoryExistsAsync(int categoryId)
 		{
             return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.PastryCategory>()
@@ -205,6 +241,33 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
                     Title = p.Title
                 })
                 .FirstAsync();
+		}
+
+		public async Task TasteAsync(int id, string userId)
+		{
+			var pastry = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>(id);
+
+			if (pastry != null)
+			{
+				pastry.TasterId = userId;
+                await repository.SaveChangesAsync();
+			}
+		}
+
+		public async Task UntasteAsync(int pastryId, string userId)
+		{
+			var pastry = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>(pastryId);
+
+			if (pastry != null)
+			{
+                if (pastry.TasterId != userId)
+                {
+                    throw new UnauthorizedActionException(UnauthorizedActionExceptionTaster);
+                }
+
+				pastry.TasterId = null;
+				await repository.SaveChangesAsync();
+			}
 		}
 	}
 }
