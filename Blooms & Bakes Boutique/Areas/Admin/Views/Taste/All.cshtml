@@ -1,0 +1,27 @@
+﻿@model IEnumerable<TasteServiceModel>
+@{
+	ViewBag.Title = "All Tasted Pastries";
+}
+
+<h2 class="text-center" style="padding-top: 2em; padding-bottom: 1.5em"><a style="color: #f075a0">All Tasted</a> Pastries</h2>
+<hr />
+
+<div class="row">
+	@foreach (var taste in Model)
+	{
+		<div class="card mb-3 col-4">
+			<img class="card-img-top" src="@taste.PastryImageUrl" alt="Pastry Image">
+			<div class="card-body text-center">
+				<h4>@taste.PastryTitle</h4>
+				<h6>Patissier: <b>@taste.PatissierFullName (@taste.PatissierEmail)</b></h6>
+				<h6>
+					Tasted By:
+					@if (taste.TasterEmail != string.Empty)
+					{
+						<b>@taste.TasterFullName (@taste.TasterEmail)</b>
+					}
+				</h6>
+			</div>
+		</div>
+	}
+</div>

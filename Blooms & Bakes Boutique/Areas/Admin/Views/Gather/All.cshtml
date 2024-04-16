@@ -1,0 +1,27 @@
+﻿@model IEnumerable<GatherServiceModel>
+@{
+	ViewBag.Title = "All Gathered Flowers";
+}
+
+<h2 class="text-center" style="padding-top: 2em; padding-bottom: 1.5em"><a style="color: #f075a0">All Gathered</a> Flowers</h2>
+<hr />
+
+<div class="row">
+	@foreach (var gather in Model)
+	{
+		<div class="card mb-3 col-4">
+			<img class="card-img-top" src="@gather.FlowerImageUrl" alt="Flower Image">
+			<div class="card-body text-center">
+				<h4>@gather.FlowerTitle</h4>
+				<h6>Florist: <b>@gather.FloristFullName (@gather.FloristEmail)</b></h6>
+				<h6>
+					Gathered By:
+					@if (gather.GathererEmail != string.Empty)
+					{
+						<b>@gather.GathererFullName (@gather.GathererEmail)</b>
+					}
+				</h6>
+			</div>
+		</div>
+	}
+</div>

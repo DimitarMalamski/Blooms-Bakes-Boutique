@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.Flowers.Flower;
+using Blooms___Bakes_Boutique.Infrastructure.Data.Models.User;
 
 namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers
 {
@@ -59,5 +60,8 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers
         [ForeignKey(nameof(FloristId))]
         [Comment("Florist")]
         public Florist Florist { get; set; } = null!;
-    }
+
+		[ForeignKey(nameof(GathererId))]
+		public ApplicationUser? Gatherer { get; set; }
+	}
 }

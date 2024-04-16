@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Blooms___Bakes_Boutique.Infrastructure.Data.Models.User;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -59,5 +60,8 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries
         [ForeignKey(nameof(PatissierId))]
         [Comment("Patissier")]
         public Patissier Patissier { get; set; } = null!;
+
+        [ForeignKey(nameof(TasterId))]
+        public ApplicationUser? Taster { get; set; } 
     }
 }
