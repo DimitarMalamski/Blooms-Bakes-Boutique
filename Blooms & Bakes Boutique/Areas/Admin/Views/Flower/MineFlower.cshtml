@@ -1,0 +1,25 @@
+﻿@model MyFlowersViewModel
+@{
+	ViewBag.Title = "My Flowers";
+}
+
+<h2 class="text-center" style="padding-top: 2em; padding-bottom: 1.5em"><a style="color: #f075a0">My</a> Flowers</h2>
+
+<h4>My Added Flowers</h4> @if (!Model.AddedFlowers.Any())
+{
+	<h2 class="text-center">You have no added flowers yet!</h2>
+} <div class="row">
+	@foreach (var flower in Model.AddedFlowers)
+	{
+		@await Html.PartialAsync("~/Views/House/_FlowerPartial.cshtml", flower)
+	}
+</div>
+<h4>My Tasted Pastries</h4> @if (!Model.GatheredFlowers.Any())
+{
+	<h2 class="text-center">You have no gathered flowers yet!</h2>
+} <div class="row">
+	@foreach (var flower in Model.GatheredFlowers)
+	{
+		@await Html.PartialAsync("~/Views/House/_FlowerPartial.cshtml", flower)
+	}
+</div>

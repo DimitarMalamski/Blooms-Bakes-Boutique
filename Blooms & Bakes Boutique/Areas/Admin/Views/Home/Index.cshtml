@@ -1,0 +1,37 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="mt-4 p-5 bg-light text-center">
+	<h2 class="display-4" style="padding-top: 2em">Hello, <a style="color: #f075a0">Admin!</a></h2>
+	<p class="lead mb-1 mt-3">
+		This is your administrator area - you can <b>read</b>, <b>create</b>, <b>delete</b> and <b>edit</b> pastries and flowers.
+		<br />
+		You can <b>taste</b> and <b>untaste</b> all pastries and aslo <b>gather</b> and <b>ungather</b> all flowers as well!
+	</p>
+	<p class="lead mt-1"> You can also see <b>all users, patissiers and florists</b> in the system. </p>
+	<hr class="my-4">
+	<div class="text-center">
+		<a asp-area="" asp-controller="Pastry" asp-action="AllPastry" style="background-color: lightpink; border: 2px solid #f075a0" class="btn btn-primary btn-lg">All Pastries</a>
+		    |
+		<a asp-area="" asp-controller="Pastry" asp-action="AddPastry" style="background-color: lightpink; border: 2px solid #f075a0" class="btn btn-primary btn-lg">Add Pastry</a> <span>
+			|
+		</span> <a asp-area="Admin" asp-controller="Pastry" asp-action="MinePastry" style="background-color: lightpink; border: 2px solid #f075a0" class="btn btn-primary btn-lg">My Pastries</a> <span>
+			|
+		</span> <a asp-area="Admin" asp-controller="Taste" asp-action="AllPastry" style="background-color: lightpink; border: 2px solid #f075a0" class="btn btn-primary btn-lg">All Tasted Pastries</a>
+	</div>
+	<div class="text-center" style="padding-top: 2em">
+		<a asp-area="" asp-controller="Flower" asp-action="AllFlower" style="background-color: lightpink; border: 2px solid #f075a0" class="btn btn-primary btn-lg">All Flowers</a>
+		    |
+		<a asp-area="" asp-controller="Flower" asp-action="AddFlower" style="background-color: lightpink; border: 2px solid #f075a0" class="btn btn-primary btn-lg">Add Flowers</a> <span>
+			|
+		</span> <a asp-area="Admin" asp-controller="Flower" asp-action="MineFlower" style="background-color: lightpink; border: 2px solid #f075a0" class="btn btn-primary btn-lg">My Flowers</a> <span>
+			|
+
+		</span> <a asp-area="Admin" asp-controller="Gather" asp-action="AllFlower" style="background-color: lightpink; border: 2px solid #f075a0" class="btn btn-primary btn-lg">All Gathered Flowers</a>
+	</div>
+	<div class="text-center" style="padding-top: 2em">
+		<a asp-area="Admin" asp-controller="User" asp-action="All" style="background-color: lightpink; border: 2px solid #f075a0" class="btn btn-primary btn-lg">All Users</a>
+	</div>
+
+</div>

@@ -12,8 +12,8 @@ builder.Services.AddApplicationIdentity(builder.Configuration);
 
 builder.Services.AddControllersWithViews(options =>
 {
-    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
-    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+	options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+	options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
 
 //Adding application Services
@@ -23,15 +23,15 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
-    app.UseMigrationsEndPoint();
+	app.UseDeveloperExceptionPage();
+	app.UseMigrationsEndPoint();
 }
 else
 {
-    // for unexpected errors!
-    app.UseExceptionHandler("/Home/Error/500");
-    app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
-    app.UseHsts();
+	// for unexpected errors!
+	app.UseExceptionHandler("/Home/Error/500");
+	app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -44,11 +44,16 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllerRoute(
-        name: "Pastry Details",
-        pattern: "/Pastry/Details/{id}/{information}",
-        defaults: new { Controller = "Pastry", Action = "PastryDetails" }
-    );
+	endpoints.MapControllerRoute(
+		name: "Areas",
+		pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+
+	endpoints.MapControllerRoute(
+		name: "Pastry Details",
+		pattern: "/Pastry/Details/{id}/{information}",
+		defaults: new { Controller = "Pastry", Action = "PastryDetails" }
+	);
 
 	endpoints.MapControllerRoute(
 		name: "Flower Details",

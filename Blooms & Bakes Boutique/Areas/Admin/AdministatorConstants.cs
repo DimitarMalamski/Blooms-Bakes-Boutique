@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blooms___Bakes_Boutique.Core.Constants
+namespace Blooms___Bakes_Boutique.Areas.Admin
 {
 	public static class AdministratorConstants
 	{

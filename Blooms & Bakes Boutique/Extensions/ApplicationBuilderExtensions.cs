@@ -1,7 +1,7 @@
 ﻿using Blooms___Bakes_Boutique.Infrastructure.Data.Models.User;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Cryptography.X509Certificates;
-using static Blooms___Bakes_Boutique.Core.Constants.AdministratorConstants;
+using static Blooms___Bakes_Boutique.Areas.Admin.AdministratorConstants;
 
 namespace Microsoft.AspNetCore.Builder
 {

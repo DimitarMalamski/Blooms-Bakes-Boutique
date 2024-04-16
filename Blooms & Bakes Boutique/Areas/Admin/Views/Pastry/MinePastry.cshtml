@@ -1,0 +1,25 @@
+﻿@model MyPastriesViewModel
+@{
+	ViewBag.Title = "My Pastries";
+}
+
+<h2 class="text-center" style="padding-top: 2em; padding-bottom: 1.5em"><a style="color: #f075a0">My</a> Pastries</h2>
+
+<h4>My Added Pastries</h4> @if (!Model.AddedPastries.Any())
+{
+	<h2 class="text-center">You have no added pastries yet!</h2>
+} <div class="row">
+	@foreach (var pastry in Model.AddedPastries)
+	{
+		@await Html.PartialAsync("~/Views/House/_PastryPartial.cshtml", pastry)
+	}
+</div>
+<h4>My Tasted Pastries</h4> @if (!Model.TastedPastries.Any())
+{
+	<h2 class="text-center">You have no tasted pastries yet!</h2>
+} <div class="row">
+	@foreach (var pastry in Model.TastedPastries)
+	{
+		@await Html.PartialAsync("~/Views/House/_PastryPartial.cshtml", pastry)
+	}
+</div>

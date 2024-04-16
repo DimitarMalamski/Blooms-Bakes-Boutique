@@ -4,6 +4,7 @@ using Blooms___Bakes_Boutique.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using static Blooms___Bakes_Boutique.Areas.Admin.AdministratorConstants;
 
 namespace Blooms___Bakes_Boutique.Controllers
 {
@@ -26,6 +27,11 @@ namespace Blooms___Bakes_Boutique.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
+            if (User.IsInRole(AdminRole))
+            {
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
+            }
+
             return View();
         }
 
