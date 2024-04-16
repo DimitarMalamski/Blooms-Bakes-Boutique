@@ -57,6 +57,11 @@ namespace Blooms___Bakes_Boutique.Controllers
 			var userId = User.Id();
 			IEnumerable<FlowerServiceModel> model;
 
+			if (User.IsAdmin())
+			{
+				return RedirectToAction("MineFlower", "Flower", new { area = "Admin" });
+			}
+
 			if (await floristService.ExistByIdAsync(userId))
 			{
 				int floristId = await floristService.GetFloristIdAsync(userId) ?? 0;

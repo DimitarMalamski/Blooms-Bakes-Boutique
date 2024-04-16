@@ -52,6 +52,11 @@ namespace Blooms___Bakes_Boutique.Controllers
 			var userId = User.Id();
 			IEnumerable<PastryServiceModel> model;
 
+			if (User.IsAdmin())
+			{
+				return RedirectToAction("MinePastry", "Pastry", new { area = "Admin" });
+			}
+
 			if (await patissierService.ExistByIdAsync(userId))
 			{
 				int patissierId = await patissierService.GetPatissierIdAsync(userId) ?? 0;
