@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ApplicationUserServiceModel>
+@{
+	ViewBag.Title = "All Users";
+} 
+
+<h2 class="text-center" style="padding-top: 4em; padding-bottom: 2em">All <a style="color: #f075a0">Users</a></h2>
+
+<table class="table table-striped">
+	<thead> <tr> <th><label>Email</label></th> <th><label>Full Name</label></th> <th><label>MasterChef Title</label></th> <th><label>User Is Patissier</label></th> <th><label>FlowerMaster Title</label></th> <th><label>User Is Florist</label></th> </tr> </thead>
+	<tbody>
+		@foreach (var user in Model)
+		{
+			<tr>
+				<td><label>@user.Email</label></td>
+				<td><label>@user.FullName</label></td>
+				<td><label>@user.MasterChefTitle</label></td>
+				<td>
+					@if (user.IsPatissier)
+					{
+						<label>✔</label>
+					}
+					else
+					{
+						<label class="text-center">❌</label>
+					}
+				</td>
+				<td><label>@user.FlowerMasterTitle</label></td>
+				<td>
+					@if (user.IsFlorist)
+					{
+						<label>✔</label>
+					}
+					else
+					{
+						<label class="text-center">❌</label>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

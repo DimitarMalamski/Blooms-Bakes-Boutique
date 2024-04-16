@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers;
+using Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,5 +20,9 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data.Models.User
 		[Required]
 		[MaxLength(UserLastNameMaxLength)]
 		public string LastName { get; set; } = null!;
-    }
+
+        public Patissier? Patissier { get; set; }
+
+		public Florist? Florist { get; set; }
+	}
 }

@@ -1,5 +1,7 @@
 ﻿using Blooms___Bakes_Boutique.Core.Contracts.ApplicationUser;
+using Blooms___Bakes_Boutique.Core.Models.ApplicationUser;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,25 @@ namespace Blooms___Bakes_Boutique.Core.Services.ApplicationUser
         {
             repository = _repository;
         }
-        public async Task<string> UserFullNameAsync(string userId)
+
+		public async Task<IEnumerable<ApplicationUserServiceModel>> AllAsync()
+		{
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.User.ApplicationUser>()
+				.Include(u => u.Patissier)
+                .Include(u => u.Florist)
+				.Select(u => new ApplicationUserServiceModel()
+				{
+					Email = u.Email,
+					FullName = $"{u.FirstName} {u.LastName}",
+					MasterChefTitle = u.Patissier != null ? u.Patissier.MasterChefTitle : null,
+                    FlowerMasterTitle = u.Florist != null ? u.Florist.FlowerMasterTitle : null,
+					IsPatissier = u.Patissier != null,
+                    IsFlorist = u.Florist != null
+				})
+				.ToListAsync();
+		}
+
+		public async Task<string> UserFullNameAsync(string userId)
         {
             string result = string.Empty;
 
