@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using System.Security.Claims;
 using static Blooms___Bakes_Boutique.Core.Constants.MessageConstants;
+using static Blooms___Bakes_Boutique.Areas.Admin.AdministratorConstants;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Blooms___Bakes_Boutique.Controllers
 {
@@ -16,16 +18,19 @@ namespace Blooms___Bakes_Boutique.Controllers
     {
 		private readonly IPastryService pastryService;
 		private readonly IPatissierService patissierService;
-		private readonly ILogger logger;
+        private readonly IMemoryCache memoryCache;
+        private readonly ILogger logger;
 
         public PastryController(
 			IPastryService _pastryService,
 			IPatissierService _patissierService,
-			ILogger<PastryController> _logger)
+			ILogger<PastryController> _logger,
+            IMemoryCache _memoryCache)
         {
 			pastryService = _pastryService;
 			patissierService = _patissierService;
 			logger = _logger;
+			memoryCache = _memoryCache;
         }
 
         [AllowAnonymous]
@@ -120,7 +125,9 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			int newPastryId = await pastryService.CreateAsync(model, patissierId ?? 0);
 
-            return RedirectToAction(nameof(PastryDetails), new { id = newPastryId, information = model.GetInformation() });
+			TempData["message"] = "You have successfully added a pastry!";
+
+			return RedirectToAction(nameof(PastryDetails), new { id = newPastryId, information = model.GetInformation() });
 		}
 
 		[HttpGet]
@@ -170,6 +177,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			await pastryService.EditAsync(id, model);
 
+			TempData["message"] = "You have successfully edited a pastry!";
+
 			return RedirectToAction(nameof(PastryDetails), new { id = id, Information = model.GetInformation() });
 		}
 
@@ -216,6 +225,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			await pastryService.DeleteAsync(model.Id);
 
+			TempData["message"] = "You have successfully deleted a pastry!";
+
 			return RedirectToAction(nameof(AllPastry));
 		}
 
@@ -240,6 +251,10 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			await pastryService.TasteAsync(id, User.Id());
 
+			memoryCache.Remove(TastesCacheKey);
+
+			TempData["message"] = "You have successfully tasted a pastry!";
+
 			return RedirectToAction(nameof(AllPastry));
 		}
 
@@ -260,8 +275,12 @@ namespace Blooms___Bakes_Boutique.Controllers
 				logger.LogError(uae, "PastryController/Untaste");
 
 				return Unauthorized();
-			}	
-			
+			}
+
+            memoryCache.Remove(TastesCacheKey);
+
+			TempData["message"] = "You have successfully untasted a pastry!";
+
 			return RedirectToAction(nameof(AllPastry));
 		}
 	}

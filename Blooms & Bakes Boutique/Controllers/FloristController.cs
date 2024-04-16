@@ -1,5 +1,6 @@
 ﻿using Blooms___Bakes_Boutique.Attributes;
 using Blooms___Bakes_Boutique.Core.Contracts.Florist;
+using Blooms___Bakes_Boutique.Core.Contracts.Patissier;
 using Blooms___Bakes_Boutique.Core.Models.Florist;
 using Blooms___Bakes_Boutique.Core.Services.Patissier;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,11 @@ namespace Blooms___Bakes_Boutique.Controllers
         [NotAFlorist]
         public async Task<IActionResult> BecomeFlorist(BecomeFloristFormModel model)
 		{
+            if (await floristService.ExistByIdAsync(User.Id()))
+            {
+                return BadRequest();
+            }
+
             if (await floristService.UserWithFlowerMasterTitleExistsAsync(model.FlowerMasterTitle))
             {
                 ModelState.AddModelError(nameof(model.FlowerMasterTitle), FlowerMasterTitleExists);
@@ -45,6 +51,8 @@ namespace Blooms___Bakes_Boutique.Controllers
             }
 
             await floristService.CreateAsync(User.Id(), model.FlowerMasterTitle);
+
+            TempData["message"] = "You have successfully become a florist!";
 
             return RedirectToAction(nameof(FlowerController.AllFlower), "Flower");
         }

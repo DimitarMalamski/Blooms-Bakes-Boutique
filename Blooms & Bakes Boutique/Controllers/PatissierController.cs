@@ -30,6 +30,11 @@ namespace Blooms___Bakes_Boutique.Controllers
         [NotAPatissier]
         public async Task<IActionResult> BecomePatissier(BecomePatissierFormModel model)
         {
+            if (await patissierService.ExistByIdAsync(User.Id()))
+            {
+                return BadRequest();
+            }
+
             if (await patissierService.UserWithMasterChefTitleExistsAsync(model.MasterChefTitle))
             {
                 ModelState.AddModelError(nameof(model.MasterChefTitle), MasterChefTitleExists);
@@ -46,6 +51,8 @@ namespace Blooms___Bakes_Boutique.Controllers
             }
 
             await patissierService.CreateAsync(User.Id(), model.MasterChefTitle);
+
+            TempData["message"] = "You have successfully become a patissier!";
 
             return RedirectToAction(nameof(PastryController.AllPastry), "Pastry");
         }

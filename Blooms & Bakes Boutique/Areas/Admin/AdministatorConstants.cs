@@ -12,5 +12,8 @@ namespace Blooms___Bakes_Boutique.Areas.Admin
 		public const string AdminAreaName = "Admin";
 		public const string AdminEmail = "admin@mail.com";
 		public const string UsersCacheKey = "UsersCacheKey";
-	}
+		public const string TastesCacheKey = "TastesCacheKey";
+        public const string GathersCacheKey = "GathersCacheKey";
+
+    }
 }

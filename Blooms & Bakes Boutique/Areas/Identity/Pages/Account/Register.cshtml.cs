@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using Blooms___Bakes_Boutique.Areas.Admin.Controllers;
 using Blooms___Bakes_Boutique.Infrastructure.Data.Models.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -18,8 +19,10 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using static Blooms___Bakes_Boutique.Infrastructure.Constants.DataConstants.User;
+using static Blooms___Bakes_Boutique.Areas.Admin.AdministratorConstants;
 
 namespace Blooms___Bakes_Boutique.Areas.Identity.Pages.Account
 {
@@ -28,13 +31,16 @@ namespace Blooms___Bakes_Boutique.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMemoryCache memoryCache;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IMemoryCache _memoryCache)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            memoryCache = _memoryCache;
         }
 
         /// <summary>
@@ -130,6 +136,7 @@ namespace Blooms___Bakes_Boutique.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    memoryCache.Remove(UsersCacheKey);
                     return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)

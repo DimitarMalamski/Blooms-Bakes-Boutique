@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using System.Security.Claims;
 using static Blooms___Bakes_Boutique.Core.Constants.MessageConstants;
+using static Blooms___Bakes_Boutique.Areas.Admin.AdministratorConstants;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Blooms___Bakes_Boutique.Controllers
 {
@@ -21,16 +23,19 @@ namespace Blooms___Bakes_Boutique.Controllers
     {
 		private readonly IFlowerService flowerService;
 		private readonly IFloristService floristService;
+		private readonly IMemoryCache memoryCache;
 		private readonly ILogger logger;
 
 		public FlowerController(
 			IFlowerService _flowerService,
 			IFloristService _floristService,
-			ILogger<FlowerController> _logger)
+			ILogger<FlowerController> _logger,
+            IMemoryCache _memoryCache)
 		{
 			flowerService = _flowerService;
 			floristService = _floristService;
 			logger = _logger;
+			memoryCache = _memoryCache;
 		}
 
 		[AllowAnonymous]
@@ -126,6 +131,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			int newFlowerId = await flowerService.CreateAsync(model, floristId ?? 0);
 
+			TempData["message"] = "You have successfully added a flower!";
+
 			return RedirectToAction(nameof(FlowerDetails), new { id = newFlowerId, information = model.GetInformation() });
 		}
 
@@ -176,6 +183,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			await flowerService.EditAsync(id, model);
 
+			TempData["message"] = "You have successfully edited a flower!";
+
 			return RedirectToAction(nameof(FlowerDetails), new { id = id, information = model.GetInformation() });
 		}
 
@@ -222,6 +231,8 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			await flowerService.DeleteAsync(model.Id);
 
+			TempData["message"] = "You have successfully deleted a flower!";
+
 			return RedirectToAction(nameof(AllFlower));
 		}
 
@@ -246,6 +257,10 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 			await flowerService.GatherAsync(id, User.Id());
 
+			memoryCache.Remove(GathersCacheKey);
+
+			TempData["message"] = "You have successfully gathered a flower!";
+
 			return RedirectToAction(nameof(AllFlower));
 		}
 
@@ -267,6 +282,10 @@ namespace Blooms___Bakes_Boutique.Controllers
 
 				return Unauthorized();
 			}
+
+            memoryCache.Remove(GathersCacheKey);
+
+			TempData["message"] = "You have successfully ungathered a flower!";
 
 			return RedirectToAction(nameof(AllFlower));
 		}
