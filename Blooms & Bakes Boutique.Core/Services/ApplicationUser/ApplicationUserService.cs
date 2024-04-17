@@ -35,6 +35,18 @@ namespace Blooms___Bakes_Boutique.Core.Services.ApplicationUser
 				.ToListAsync();
 		}
 
+		public async Task<bool> UserHasGatheredFlowersAsync(string userId)
+		{
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
+				.AnyAsync(f => f.GathererId == userId);
+		}
+
+		public async Task<bool> UserHasTastedPatriesAsync(string userId)
+		{
+			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>()
+				.AnyAsync(p => p.TasterId == userId);
+		}
+
 		public async Task<string> UserFullNameAsync(string userId)
         {
             string result = string.Empty;

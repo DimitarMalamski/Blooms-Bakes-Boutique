@@ -38,16 +38,10 @@ namespace Blooms___Bakes_Boutique.Core.Services.Patissier
 		public async Task<int?> GetPatissierIdAsync(string userId)
 		{
 			return (await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier>()
-				.FirstOrDefaultAsync(pa => pa.UserId == userId))?.Id;
+				.FirstOrDefaultAsync(pa => pa.UserId == userId))?.Id ?? 0;
 		}
 
-		public async Task<bool> UserHasTastedPatriesAsync(string userId)
-		{
-			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Pastry>()
-				.AnyAsync(p => p.TasterId == userId);
-		}
-
-		public async Task<bool> UserWithMasterChefTitleExistsAsync(string masterChefTitle)
+		public async Task<bool> PatissierWithMasterChefTitleExistsAsync(string masterChefTitle)
 		{
 			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier>()
 				.AnyAsync(pa => pa.MasterChefTitle == masterChefTitle);

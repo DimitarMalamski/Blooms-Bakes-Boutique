@@ -4,9 +4,7 @@
     {
 		Task<bool> ExistByIdAsync(string userId);
 
-		Task<bool> UserWithMasterChefTitleExistsAsync(string masterChefTitle);
-
-		Task<bool> UserHasTastedPatriesAsync(string userId);
+		Task<bool> PatissierWithMasterChefTitleExistsAsync(string masterChefTitle);
 
 		Task CreateAsync(string userId, string masterChefTitle);
 

@@ -7,35 +7,35 @@ namespace Blooms___Bakes_Boutique.ModelBinders
 	{
 		public Task BindModelAsync(ModelBindingContext bindingContext)
 		{
-			ValueProviderResult valueResult = bindingContext.ValueProvider
-				.GetValue(bindingContext.ModelName);
+			var valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
 
-			if (valueResult != ValueProviderResult.None && !string.IsNullOrEmpty(valueResult.FirstValue))
+			if (valueProviderResult == null)
 			{
-				decimal result = 0M;
-				bool success = false;
-
-				try
-				{
-					string strValue = valueResult.FirstValue.Trim();
-					strValue = strValue.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-					strValue = strValue.Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-
-					result = Convert.ToDecimal(strValue, CultureInfo.CurrentCulture);
-					success = true;
-				}
-				catch (FormatException fe)
-				{
-					bindingContext.ModelState.AddModelError(bindingContext.ModelName, fe, bindingContext.ModelMetadata);
-				}
-
-				if (success)
-				{
-					bindingContext.Result = ModelBindingResult.Success(result);
-				}
+				return Task.CompletedTask;
 			}
 
-			return Task.CompletedTask;
+			var value = valueProviderResult.FirstValue;
+
+			if (string.IsNullOrEmpty(value))
+			{
+				return Task.CompletedTask;
+			}
+
+			// Remove unnecessary commas and spaces
+			value = value.Replace(",", string.Empty).Trim();
+
+			decimal myValue = 0;
+			try
+			{
+				myValue = Convert.ToDecimal(value, CultureInfo.InvariantCulture);
+				bindingContext.Result = ModelBindingResult.Success(myValue);
+				return Task.CompletedTask;
+			}
+			catch (Exception m)
+			{
+				return Task.CompletedTask;
+			}
+
 		}
 	}
 }

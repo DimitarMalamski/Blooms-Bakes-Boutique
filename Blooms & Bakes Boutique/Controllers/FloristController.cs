@@ -1,4 +1,5 @@
 ﻿using Blooms___Bakes_Boutique.Attributes;
+using Blooms___Bakes_Boutique.Core.Contracts.ApplicationUser;
 using Blooms___Bakes_Boutique.Core.Contracts.Florist;
 using Blooms___Bakes_Boutique.Core.Contracts.Patissier;
 using Blooms___Bakes_Boutique.Core.Models.Florist;
@@ -12,9 +13,13 @@ namespace Blooms___Bakes_Boutique.Controllers
 	public class FloristController : BaseController
     {
 		private readonly IFloristService floristService;
-		public FloristController(IFloristService _floristService)
+        private readonly IApplicationUserService applicationUserService;
+		public FloristController(
+            IFloristService _floristService,
+			IApplicationUserService _applicationUserService)
 		{
 			floristService = _floristService;
+            applicationUserService = _applicationUserService;
 		}
 
 		[HttpGet]
@@ -35,12 +40,12 @@ namespace Blooms___Bakes_Boutique.Controllers
                 return BadRequest();
             }
 
-            if (await floristService.UserWithFlowerMasterTitleExistsAsync(model.FlowerMasterTitle))
+            if (await floristService.FloristWithFlowerMasterTitleExistsAsync(model.FlowerMasterTitle))
             {
                 ModelState.AddModelError(nameof(model.FlowerMasterTitle), FlowerMasterTitleExists);
             }
 
-            if (await floristService.UserHasGatheredFlowersAsync(User.Id()))
+            if (await applicationUserService.UserHasGatheredFlowersAsync(User.Id()))
             {
                 ModelState.AddModelError("Error", HasGathered);
             }

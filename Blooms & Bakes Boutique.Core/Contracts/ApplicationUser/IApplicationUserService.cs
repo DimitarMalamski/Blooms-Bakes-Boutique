@@ -12,5 +12,9 @@ namespace Blooms___Bakes_Boutique.Core.Contracts.ApplicationUser
         Task<string> UserFullNameAsync(string userId);
 
         Task<IEnumerable<ApplicationUserServiceModel>> AllAsync();
-    }
+
+		Task<bool> UserHasTastedPatriesAsync(string userId);
+
+		Task<bool> UserHasGatheredFlowersAsync(string userId);
+	}
 }

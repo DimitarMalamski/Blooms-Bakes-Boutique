@@ -4,9 +4,7 @@
     {
         Task<bool> ExistByIdAsync(string userId);
 
-        Task<bool> UserWithFlowerMasterTitleExistsAsync(string flowerMasterTitle);
-
-        Task<bool> UserHasGatheredFlowersAsync(string userId);
+        Task<bool> FloristWithFlowerMasterTitleExistsAsync(string flowerMasterTitle);
 
         Task CreateAsync(string userId, string flowerMasterTitle);
 

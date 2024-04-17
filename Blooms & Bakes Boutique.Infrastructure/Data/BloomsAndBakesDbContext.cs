@@ -12,22 +12,38 @@ namespace Blooms___Bakes_Boutique.Infrastructure.Data
 {
     public class BloomsAndBakesDbContext : IdentityDbContext<ApplicationUser>
     {
-        public BloomsAndBakesDbContext(DbContextOptions<BloomsAndBakesDbContext> options)
+        private bool _seedDb;
+
+        public BloomsAndBakesDbContext(DbContextOptions<BloomsAndBakesDbContext> options, bool seed = true)
             : base(options)
         {
+            if (Database.IsRelational())
+            {
+                Database.Migrate();
+            }
+            else
+            {
+                Database.EnsureCreated();
+            }
+
+            _seedDb = seed;
+
         }
 
         //overwriting OnModelCreating method
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new UserConfiguration());
-            builder.ApplyConfiguration(new PatissierConfiguration());
-            builder.ApplyConfiguration(new PastyCategoryConfiguration());
-            builder.ApplyConfiguration(new PastryConfiguration());
-            builder.ApplyConfiguration(new FloristConfiguration());           
-            builder.ApplyConfiguration(new FlowerCategoryConfiguration());           
-            builder.ApplyConfiguration(new FlowerConfiguration());
-			builder.ApplyConfiguration(new UserClaimsConfiguration());
+            if (_seedDb)
+            {
+				builder.ApplyConfiguration(new UserConfiguration());
+				builder.ApplyConfiguration(new PatissierConfiguration());
+				builder.ApplyConfiguration(new PastyCategoryConfiguration());
+				builder.ApplyConfiguration(new PastryConfiguration());
+				builder.ApplyConfiguration(new FloristConfiguration());
+				builder.ApplyConfiguration(new FlowerCategoryConfiguration());
+				builder.ApplyConfiguration(new FlowerConfiguration());
+				builder.ApplyConfiguration(new UserClaimsConfiguration());
+			}         
 
 			base.OnModelCreating(builder);
         }

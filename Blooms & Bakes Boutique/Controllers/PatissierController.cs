@@ -1,4 +1,5 @@
 ﻿using Blooms___Bakes_Boutique.Attributes;
+using Blooms___Bakes_Boutique.Core.Contracts.ApplicationUser;
 using Blooms___Bakes_Boutique.Core.Contracts.Patissier;
 using Blooms___Bakes_Boutique.Core.Models.Patissier;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,14 @@ namespace Blooms___Bakes_Boutique.Controllers
 	public class PatissierController : BaseController
     {
         private readonly IPatissierService patissierService;
+        private readonly IApplicationUserService applicationUserService;
 
-        public PatissierController(IPatissierService _patissierService)
+        public PatissierController(
+            IPatissierService _patissierService,
+			IApplicationUserService _applicationUserService)
         {
             patissierService = _patissierService;
+            applicationUserService = _applicationUserService;
         }
 
         [HttpGet]
@@ -35,12 +40,12 @@ namespace Blooms___Bakes_Boutique.Controllers
                 return BadRequest();
             }
 
-            if (await patissierService.UserWithMasterChefTitleExistsAsync(model.MasterChefTitle))
+            if (await patissierService.PatissierWithMasterChefTitleExistsAsync(model.MasterChefTitle))
             {
                 ModelState.AddModelError(nameof(model.MasterChefTitle), MasterChefTitleExists);
             }
 
-            if (await patissierService.UserHasTastedPatriesAsync(User.Id()))
+            if (await applicationUserService.UserHasTastedPatriesAsync(User.Id()))
             {
                 ModelState.AddModelError("Error", HasTasted);
             }

@@ -35,13 +35,7 @@ namespace Blooms___Bakes_Boutique.Core.Services.Florist
 				.FirstOrDefaultAsync(pa => pa.UserId == userId))?.Id;
 		}
 
-		public async Task<bool> UserHasGatheredFlowersAsync(string userId)
-		{
-			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Flower>()
-				.AnyAsync(f => f.GathererId == userId);
-		}
-
-		public async Task<bool> UserWithFlowerMasterTitleExistsAsync(string flowerMasterTitle)
+		public async Task<bool> FloristWithFlowerMasterTitleExistsAsync(string flowerMasterTitle)
 		{
 			return await repository.AllReadOnly<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Florist>()
 				.AnyAsync(fl => fl.FlowerMasterTitle == flowerMasterTitle);
