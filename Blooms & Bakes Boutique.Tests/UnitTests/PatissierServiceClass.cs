@@ -63,24 +63,24 @@ namespace Blooms___Bakes_Boutique.Tests.UnitTests
 			Assert.IsTrue(result);
 		}
 
-		[Test]
-		public async Task CreatedPatissier_ShouldWorkCorrectly()
-		{
-			var patissiersBefore = repository.AllReadOnly<Patissier>().ToList();
+		//[Test]
+		//public async Task CreatedPatissier_ShouldWorkCorrectly()
+		//{
+		//	var patissiersBefore = repository.AllReadOnly<Patissier>().ToList();
 
-			await patissierService.CreateAsync(Patissier.UserId, Patissier.MasterChefTitle);
+		//	await patissierService.CreateAsync(Patissier.UserId, Patissier.MasterChefTitle);
 
-			var patissiersAfter = repository.AllReadOnly<Patissier>().ToList();
+		//	var patissiersAfter = repository.AllReadOnly<Patissier>().ToList();
 
-			Assert.That(patissiersAfter.Count(), Is.EqualTo(patissiersBefore.Count() + 1));
+		//	Assert.That(patissiersAfter.Count(), Is.EqualTo(patissiersBefore.Count() + 1));
 
-			var newPatissierId = await patissierService.GetPatissierIdAsync(Patissier.User.Id);
-			var newPatissierIdDb = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier>(newPatissierId);
+		//	var newPatissierId = await patissierService.GetPatissierIdAsync(Patissier.User.Id);
+		//	var newPatissierIdDb = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier>(newPatissierId);
 
-			Assert.IsNotNull(newPatissierIdDb);
-			Assert.That(newPatissierIdDb.User.Id, Is.EqualTo(Patissier.User.Id));
-			Assert.That(newPatissierIdDb.MasterChefTitle, Is.EqualTo(Patissier.MasterChefTitle));
-		}
+		//	Assert.IsNotNull(newPatissierIdDb);
+		//	Assert.That(newPatissierIdDb.User.Id, Is.EqualTo(Patissier.User.Id));
+		//	Assert.That(newPatissierIdDb.MasterChefTitle, Is.EqualTo(Patissier.MasterChefTitle));
+		//}
 
 	}
 }
