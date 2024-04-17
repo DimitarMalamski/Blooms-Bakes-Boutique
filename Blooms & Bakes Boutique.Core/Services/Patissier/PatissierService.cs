@@ -20,12 +20,13 @@ namespace Blooms___Bakes_Boutique.Core.Services.Patissier
 
 		public async Task CreateAsync(string userId, string masterChefTitle)
 		{
-			await repository.AddAsync(new Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier()
+			Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier patissier =  new Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier()
 			{
 				UserId = userId,
 				MasterChefTitle = masterChefTitle
-			});
+			};
 
+			await repository.AddAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Pastries.Patissier>(patissier);
 			await repository.SaveChangesAsync();
 		}
 

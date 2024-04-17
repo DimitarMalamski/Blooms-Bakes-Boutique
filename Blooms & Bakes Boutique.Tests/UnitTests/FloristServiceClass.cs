@@ -58,6 +58,16 @@ namespace Blooms___Bakes_Boutique.Tests.UnitTests
 			//Assert a correct id is returned
 			Assert.IsTrue(result);
 		}
+		[Test]
+		public async Task CreatedFlorist_ShouldWorkCorrectly()
+		{
+			var newFloristId = await floristService.GetFloristIdAsync(Florist.UserId);
+			var newFloristIdDb = await repository.GetByIdAsync<Blooms___Bakes_Boutique.Infrastructure.Data.Models.Flowers.Florist>(newFloristId);
+
+			Assert.IsNotNull(newFloristIdDb);
+			Assert.That(newFloristIdDb.UserId, Is.EqualTo(Florist.UserId));
+			Assert.That(newFloristIdDb.FlowerMasterTitle, Is.EqualTo(Florist.FlowerMasterTitle));
+		}
 
 	}
 }

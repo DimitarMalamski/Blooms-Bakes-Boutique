@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Blooms___Bakes_Boutique.Tests.UnitTests
 {
+	[TestFixture]
 	public class TasteServiceTests : UnitTestsBase
 	{
 		private ITasteService tasteService;
@@ -32,7 +33,22 @@ namespace Blooms___Bakes_Boutique.Tests.UnitTests
 
 			Assert.IsNotNull(result);
 
-			var tastedpastriesCount = repository.AllReadOnly<Pastry>()
+			var tastedPastriesInDb = repository.AllReadOnly<Pastry>()
+				.Where(p => p.TasterId != null);
+
+			Assert.That(result.ToList().Count(), Is.EqualTo(tastedPastriesInDb.Count()));
+
+			var resultPastry = result.ToList()
+				.Find(p => p.PastryTitle == TastedPastry.Title);
+
+			Assert.IsNotNull(resultPastry);
+			Assert.AreEqual(Taster.Email, resultPastry.TasterEmail);
+			Assert.AreEqual(Taster.FirstName + " " + Taster.LastName,
+				resultPastry.TasterFullName);
+
+			Assert.AreEqual(Patissier.User.Email, resultPastry.PatissierEmail);
+			Assert.AreEqual(Patissier.User.FirstName + " " + Patissier.User.LastName,
+				resultPastry.PatissierFullName);
 		}
 	}
 }
