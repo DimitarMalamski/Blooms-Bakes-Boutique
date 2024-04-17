@@ -58,8 +58,7 @@ namespace Blooms___Bakes_Boutique.Core.Services.Pastry
 
                 pastriesToShow = pastriesToShow
                     .Where(p => p.Title.ToLower().Contains(normalizedSearchTerm) ||
-                                p.Description.ToLower().Contains(normalizedSearchTerm) ||
-                                p.Recipe.ToLower().Contains(normalizedSearchTerm));
+                                p.Description.ToLower().Contains(normalizedSearchTerm));
             }
 
             pastriesToShow = sorting switch
