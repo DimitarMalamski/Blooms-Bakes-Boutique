@@ -1,6 +1,8 @@
+using System.Globalization;
 using Blooms___Bakes_Boutique.Infrastructure.Data;
 using Blooms___Bakes_Boutique.ModelBinders;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +24,21 @@ builder.Services.AddApplicationServices();
 builder.Services.AddMemoryCache();
 
 var app = builder.Build();
+
+var supportedCultures = new[]
+{
+	new CultureInfo("en-US"),
+	new CultureInfo("es"),
+};
+
+app.UseRequestLocalization(new RequestLocalizationOptions()
+{
+	DefaultRequestCulture = new RequestCulture("en-US"),
+	// Formatting numbers, dates, etc.
+	SupportedCultures = supportedCultures,
+	// Localized UI strings.
+	SupportedUICultures = supportedCultures
+});
 
 if (app.Environment.IsDevelopment())
 {
