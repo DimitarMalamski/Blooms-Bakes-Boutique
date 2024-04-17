@@ -14,8 +14,12 @@ builder.Services.AddApplicationIdentity(builder.Configuration);
 
 builder.Services.AddControllersWithViews(options =>
 {
-	options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
 	options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+});
+
+builder.Services.AddMvc((options) =>
+{
+	options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
 });
 
 //Adding application Services
